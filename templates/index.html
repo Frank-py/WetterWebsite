@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Air Quality</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+</head>
+<body>
+    <div style="width: 75%;">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <script>
+        var ctx = document.getElementById('chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['IAQ Index', 'Temperature', 'Humidity', 'Air Pressure'],
+                datasets: [{
+                    label: 'Air Quality',
+                    data: [{{data.iaq_index}}, {{data.temperature}}, {{data.humidity}}, {{data.air_pressure}}],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

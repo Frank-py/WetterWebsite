@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "chart.js": "^4.4.0",
+    "cors": "^2.8.5",
     "mariadb": "^3.2.0"
   }
 }

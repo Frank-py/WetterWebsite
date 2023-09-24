@@ -1,16 +1,25 @@
 const mariadb = require('mariadb');
 const chartjs = require('chart.js');
 const http = require('http');
-const host = '0.0.0.0';
+const host = 'localhost';
 const port = 8000;
 
+//const pool = mariadb.createPool({
+//    host: "localhost",
+//    user: "Wetter",
+//    password: "retteW",
+//    database: "WVS_Wetter"
+//});
 const pool = mariadb.createPool({
     host: "localhost",
-    user: "Wetter",
-    password: "retteW",
-    database: "WVS_Wetter"
+    user: "admin",
+    password: "4sdf38§$/WE3/FW§459fd2w3",
+    database: "Wetter"
 });
 const requestListener = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    res.setHeader('Access-Control-Allow-Headers', '*');
     const data = await getData();
     console.log(data);
     res.writeHead(200);
@@ -24,7 +33,8 @@ async function getData () {
     let conn;
     try {
         conn = await pool.getConnection();
-    	const rows = await conn.query("SELECT * FROM Data LIMIT 5");
+    	const rows = await conn.query("SELECT * FROM WeatherData LIMIT 5");
+    	//const rows = await conn.query("SELECT * FROM Data LIMIT 5");
 	return rows;
     } catch (err) {
         throw err;

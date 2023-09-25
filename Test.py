@@ -60,15 +60,15 @@ while True:
     data_dict = {
         "iaq_index_accuracy": iaq_index_accuracy, #
         "iaq_index": iaq_index,
-        "temperature": temperature, # 100 °C
-        "humidity": humidity,  # 100°C
-        "air_pressure": air_pressure, # 100hpa
-        "r_temperature": data[0],   # 10 °C
-        "r_humidity": data[1],      # % 
-        "r_wind_speed": data[2]*10,    # 1/10 m/s
-        "r_gust_of_wind": data[3]*10,  # 1/10 m/s
-        "rainfall": data[4]*10,        # 1/10 mm
-        "wind_dir": direction[data[5]],        # 
+        "temperature": temperature, # 100 °C   
+        "humidity": humidity,  # 100°C     
+        "air_pressure": air_pressure, # 100hpa        7
+        "r_temperature": data[0],   # 10 °C           1
+        "r_humidity": data[1],      # %               2
+        "r_wind_speed": data[2]*10,    # 1/10 m/s     3
+        "r_gust_of_wind": data[3]*10,  # 1/10 m/s     4
+        "rainfall": data[4]*10,        # 1/10 mm      5
+        "wind_dir": direction[data[5]],        #      6
         "batterywarning": data[6],
         "lastchange": data[-1]
     }

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Wetter vom Siemens</title>
+        <link rel="stylesheet" href="style.css">
+        <style> 
+        * {
+            background-color: rgb(67, 70, 75);
+        }
+        </style>
+    </head>
+
+
+
+    <body>
+        <div class="grid-container-container">
+
+            <div class="grid-container-current">
+                <div style="color: rgb(1,193,175);" class="currentTemp">
+                    Temperature: 18°
+                </div>
+                <div style="color: rgb(1,193,175);" class="currentHumidity">
+                    Humidity: 80%
+                </div>
+                <div style="color: rgb(1,193,175);" class="currentAirPressure">
+                    Air pressure: 100000 Hpa
+                </div>
+                <div style="color: rgb(1,193,175);" class="currentRainfall">
+                    Rainfall: 50%
+                </div>
+            </div>
+
+            <div class="grid-container-graph">
+                <div class="Temperature">
+                    <canvas id="Temperature"></canvas>
+                </div>
+                <div class="Humidity">
+                    <canvas id="Humidity"></canvas>
+                </div>
+                <div class="AirPressure">
+                    <canvas id="AirPressure"></canvas>
+                </div>
+                <div class="WindSpeed">
+                    <canvas id="WindSpeed"></canvas>
+                </div>
+                <div class="Rainfall">
+                    <canvas id="Rainfall"></canvas>
+                </div>
+                <div>
+                    <canvas id="GustOfWind"></canvas>
+                </div>
+                <div>
+                    <canvas id="WindDirection"></canvas>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+        (async () => {
+
+
+            var Temperature;
+            var Humidity;
+            var AirPressure;
+            var WindSpeed;
+            var Rainfall;
+
+            var GustOfWind;
+            var WindDirection;
+
+            async function createGraph(graphType) {
+                let obj;
+                const res = await fetch(`http://localhost:8000/data?graphType=${graphType}`, {});
+                obj = await res.json();
+                var labels = [];
+                var attributeData = [];
+                for (let i = 0; i < obj.length; i++) {
+                    labels.push(obj[i].Timestamp);
+                    attributeData.push(obj[i][graphType]);
+                }
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: graphType,
+                        fill: true,
+                        //backgroundColor: "rgba(220,220,220,0.2)",
+                        borderWidth: 2,
+                        //borderColor: "rgba(220,220,220,1)",
+                        pointBorderColor: "rgba(220,220,220,1)",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(220,220,220,1)",
+                        pointHoverBorderColor: "rgba(220,220,220,1)",
+                        pointHoverBorderWidth: 2,
+                        backgroundColor: 'rgb(1,193,175)',
+                        borderColor: 'rgb(1,193,175)',
+                        data: attributeData
+                    }]
+                };
+
+                const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'rgb(1,193,175)'
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                border: {
+                                    color: "rgb(1,193,175)", // this here
+                                },
+                                ticks: {
+                                    color: "rgb(1,193,175)", // this here
+                                },
+                                grid: {
+                                    //display: false,
+                                    tickColor: "rgb(1,193,175)" // this her
+                                }
+                                                            
+                            },
+                            y: {
+                                ticks: {
+                                    color: "rgb(1,193,175)", // this here
+                                },
+                                grid: {
+                                    //display: false,
+                                    tickColor: "rgb(1,193,175)" // this her
+                                },
+                                border: {
+                                    color: "rgb(1,193,175)", // this here
+                                },
+
+                            },
+                        }
+                    }
+                };
+
+                return config;
+            }
+            async function updateChart(graphTypestr, graph) {
+                let obj;
+                const res = await fetch(`http://localhost:8000/data?graphType=${graphTypestr}`, {});
+                obj = await res.json();
+                if (obj.slice(-1).Timestamp != graph.data.labels.slice(-1)[0]) {
+                    graph.data.datasets[0].data.push(obj.slice(-1).Temperature);
+                    graph.update();
+                }
+            }
+            var config;
+            config = await createGraph("Temperature");
+            Temperature = new Chart(
+                document.getElementById('Temperature'), 
+                config
+            );
+            config = await createGraph("Humidity");
+            Humidity = new Chart(document.getElementById('Humidity'),
+                config
+            );
+            config = await createGraph("WindSpeed")
+            WindSpeed = new Chart(document.getElementById('WindSpeed'),
+                config
+            );
+            config = await createGraph("Rainfall")
+            Rainfall = new Chart(document.getElementById('Rainfall'),
+                config
+            );
+
+            setInterval(function () {updateChart("Temperature", Temperature);}, 3000);
+            setInterval(function () {updateChart("Humidity", Humidity);}, 3000);
+            setInterval(function () {updateChart("WindSpeed", WindSpeed);}, 3000);
+            setInterval(function () {updateChart("Rainfall", Rainfall);}, 3000);
+        })();
+        </script>
+</body>
+</html>

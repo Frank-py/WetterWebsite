@@ -62,13 +62,13 @@ while True:
         "iaq_index": iaq_index,
         "temperature": temperature, # 100 °C   
         "humidity": humidity,  # 100°C     
-        "air_pressure": air_pressure, # 100hpa        7
-        "r_temperature": data[0],   # 10 °C           1
-        "r_humidity": data[1],      # %               2
-        "r_wind_speed": data[2]*10,    # 1/10 m/s     3
-        "r_gust_of_wind": data[3]*10,  # 1/10 m/s     4
-        "rainfall": data[4]*10,        # 1/10 mm      5
-        "wind_dir": direction[data[5]],        #      6
+        "air_pressure": air_pressure, # 100hpa        7 graph info
+        "r_temperature": data[0],   # 10 °C           1 graph info i
+        "r_humidity": data[1],      # %               2 graph info
+        "r_wind_speed": data[2]*10,    # 1/10 m/s     3 graph info
+        "rainfall": data[4]*10,        # 1/10 mm      5 graph info i
+        "r_gust_of_wind": data[3]*10,  # 1/10 m/s     4 
+        "wind_dir": direction[data[5]],        #      6       info
         "batterywarning": data[6],
         "lastchange": data[-1]
     }

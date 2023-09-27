@@ -2,24 +2,25 @@ from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_air_quality import BrickletAirQuality
 from tinkerforge.bricklet_outdoor_weather import BrickletOutdoorWeather
 from flask import Flask, render_template
+import config
 import time
 import mariadb
 import sys
 
 try:
 	conn = mariadb.connect(
-             user="***REMOVED***",
-            password="***REMOVED***",
-             host="localhost",
-            port=***REMOVED***,
-             database="***REMOVED***")
+            user=config.userOnline,
+            password=config.passwordOnline,
+            host=config.hostOnline,
+            port=config.port,
+            database=config.databaseOnline)
 
 	conn2 = mariadb.connect(
-             user="***REMOVED***",
-            password="***REMOVED***",
-             host="localhost",
-            port=***REMOVED***,
-             database="***REMOVED***")
+            user=config.userLocal,
+            password=config.passwordLocal,
+            host=config.hostLocal,
+            port=config.port,
+            database=config.databaseLocal)
 
 except mariadb.Error as e:
         print(f"Error connecting to MariaDB Platform: {e}")

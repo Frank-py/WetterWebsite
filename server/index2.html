@@ -1,351 +1,511 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .title {
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-            font-size: 36px;
-            color: #3498db; /* Blue color */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .title {
+        text-align: center;
+        font-family: "Arial", sans-serif;
+        font-size: 36px;
+        color: #3498db; /* Blue color */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+      }
 
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            margin: 10px;
-            width: calc(14.28% - 20px); /* 100% / 7 cards */
-            text-align: center;
-        }
+      .card {
+        border: 1px solid /* #060483 */ black;
+        background-color: /* #149cc2 */ white;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 10px;
+        width: calc(14.28% - 20px);
+        text-align: center;
+      }
 
-        .sun-icon {
-            font-size: 50px;
-            margin-bottom: 10px;
-        }
+      .sun-icon {
+        font-size: 50px;
+        margin-bottom: 10px;
+      }
 
-        .graph-card {
-            display: flex;
-            justify-content: space-between;
-        }
+      .graph-card {
+        display: flex;
+        justify-content: space-between;
+      }
 
-        .graph {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            margin: 10px;
-            flex: 1;
-        }
-        footer {
-            color: white;
-            padding: 10px 0;
-        }
+      .graph {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 10px;
+        flex: 1;
+      }
+      footer {
+        color: white;
+        padding: 10px 0;
+      }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .footer-links,
-        .social-links {
-            list-style: none;
-            padding: 0;
-            display: flex;
-        }
+      .footer-links,
+      .social-links {
+        list-style: none;
+        padding: 0;
+        display: flex;
+      }
 
-        .footer-links li,
-        .social-links li {
-            margin-right: 20px; /* Add spacing between links */
-        }
+      .footer-links li,
+      .social-links li {
+        margin-right: 20px; /* Add spacing between links */
+      }
 
-        .footer-links li:last-child,
-        .social-links li:last-child {
-            margin-right: 0; /* Remove margin for the last link */
-        }
+      .footer-links li:last-child,
+      .social-links li:last-child {
+        margin-right: 0; /* Remove margin for the last link */
+      }
 
-        .footer-links a,
-        .social-links a {
-            color: black;
-            text-decoration: none;
-            font-size: 16px; /* Adjust the font size to your liking */
-            transition: color 0.3s; /* Add a smooth color transition on hover */
-        }
+      .footer-links a,
+      .social-links a {
+        color: black;
+        text-decoration: none;
+        font-size: 16px; /* Adjust the font size to your liking */
+        transition: color 0.3s; /* Add a smooth color transition on hover */
+      }
 
-        .footer-links a:hover,
-        .social-links a:hover {
-            color: #2c3e50; /* Change the text color on hover */
-        }
-        .footer-bottom {
-            color: black;
-            text-align: center;
-            padding: 10px 0;
-        }
-        .wind-icon {
-            font-size: 48px;
-        }
-        .rain-icon {
-            font-size: 48px;
-        }
-        .compass-icon {
-            font-size: 48px;
-        }
-        .humidity-icon {
-            font-size: 48px;
-        }
+      .footer-links a:hover,
+      .social-links a:hover {
+        color: #2c3e50; /* Change the text color on hover */
+      }
+      .footer-bottom {
+        color: black;
+        text-align: center;
+        padding: 10px 0;
+      }
+      .wind-icon {
+        font-size: 48px;
+      }
+      .rain-icon {
+        font-size: 48px;
+      }
+      .compass-icon {
+        font-size: 48px;
+      }
+      .humidity-icon {
+        font-size: 48px;
+      }
     </style>
-</head>
-<body>
-    <div class="title">WVS-Wetter</div> 
+  </head>
+  <body>
+    <div class="title">WVS-Wetter</div>
     <div class="header">
-        <div class="card">
-            <p>Temperature: 22 °C</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 131.24 260.79"><path d="M79.21 99.95V31.54c0-5.73-2.35-10.94-6.13-14.73-3.78-3.78-9-6.13-14.73-6.13s-10.94 2.35-14.73 6.13c-3.78 3.79-6.13 9-6.13 14.73V163.1c-14.45 7.41-24.33 22.46-24.33 39.82 0 24.69 20.01 44.71 44.71 44.71s44.72-20.02 44.72-44.71c0-16.97-9.45-31.73-23.38-39.31V99.95zm-12.23 71.36c13.73 3.95 23.78 16.6 23.78 31.61 0 18.16-14.72 32.88-32.89 32.88-18.16 0-32.89-14.72-32.89-32.88 0-15.01 10.05-27.66 23.79-31.61V55.52c0-11.31 18.21-10.86 18.21 0v115.79zm34.19-134.88v-9.68h25.23c2.67 0 4.84 2.16 4.84 4.84 0 2.67-2.17 4.84-4.84 4.84h-25.23zm0 26.43v-9.68h25.23c2.67 0 4.84 2.17 4.84 4.84s-2.17 4.84-4.84 4.84h-25.23zm0 26.43v-9.68h25.23c2.67 0 4.84 2.17 4.84 4.84s-2.17 4.84-4.84 4.84h-25.23zm0 26.43v-9.68h25.23c2.67 0 4.84 2.17 4.84 4.84s-2.17 4.84-4.84 4.84h-25.23zm0 26.43v-9.68h25.23c2.67 0 4.84 2.17 4.84 4.84 0 2.68-2.17 4.84-4.84 4.84h-25.23zM89.9 154.71c15.58 10.37 25.84 28.09 25.84 48.21 0 31.96-25.91 57.87-57.87 57.87C25.91 260.79 0 234.88 0 202.92c0-20.53 10.69-38.57 26.81-48.84V31.54c0-8.68 3.55-16.56 9.26-22.28C41.79 3.55 49.67 0 58.35 0c8.68 0 16.57 3.55 22.28 9.26 5.72 5.72 9.27 13.6 9.27 22.28v123.17z"/></svg>
-        </div>
-        <div class="card">
-            <p>Humidity: 50 %</p>
-            <?xml version="1.0" encoding="utf-8"?><svg version="1.1" width="48" height="48" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 90.06" style="enable-background:new 0 0 122.88 90.06" xml:space="preserve"><g><path d="M118.64,70.87c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,60,61.13,105.16,29.6,84.54c-6.42-4.2-12.72-8.32-25.36,2.74c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 C99.7,77.81,106,81.93,118.64,70.87L118.64,70.87z M4.24,19.18C3.18,20.11,1.56,20,0.63,18.94c-0.93-1.06-0.82-2.68,0.24-3.61 c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64c6.42,4.2,12.72,8.32,25.36-2.74 c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11-8.1,61.13,37.07,29.6,16.44C23.18,12.24,16.88,8.12,4.24,19.18L4.24,19.18z M4.24,41.88c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 c6.42,4.2,12.72,8.32,25.36-2.74c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,14.6,61.13,59.77,29.6,39.14C23.18,34.94,16.88,30.82,4.24,41.88L4.24,41.88z M4.24,64.58c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 c6.42,4.2,12.72,8.32,25.36-2.74c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,37.3,61.13,82.47,29.6,61.84C23.18,57.64,16.88,53.52,4.24,64.58L4.24,64.58z"/></g></svg>
-        </div>
-        <div class="card">
-            <p>Air pressure: 100 hPa</p>
-            <?xml version="1.0" encoding="utf-8"?><svg version="1.1" width="48" height="48" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.88px" height="122.88px" viewBox="0 0 122.88 122.88" enable-background="new 0 0 122.88 122.88" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M61.439,0c33.928,0,61.44,27.513,61.44,61.439c0,33.929-27.513,61.44-61.44,61.44 C27.512,122.88,0,95.368,0,61.439C0,27.513,27.512,0,61.439,0L61.439,0z M45.917,40.282l19.997,36.447 c1.326,1.263,2.336,2.896,2.846,4.796c1.475,5.502-1.791,11.159-7.293,12.634c-5.501,1.474-11.159-1.794-12.634-7.293 c-0.388-1.451-0.446-2.914-0.222-4.309L45.917,40.282L45.917,40.282z M112.652,64.89c0,4.503-3.653,8.156-8.154,8.156 c-4.504,0-8.158-3.653-8.158-8.156c0-4.502,3.654-8.155,8.158-8.155C108.999,56.734,112.652,60.388,112.652,64.89L112.652,64.89z M10.229,64.89c0,4.503,3.651,8.156,8.155,8.156c4.504,0,8.155-3.653,8.155-8.156c0-4.502-3.651-8.155-8.155-8.155 C13.881,56.734,10.229,60.388,10.229,64.89L10.229,64.89z M25.124,28.49c-3.184,3.184-3.184,8.35,0,11.534 c3.184,3.184,8.35,3.184,11.534,0c3.184-3.184,3.184-8.35,0-11.534C33.474,25.306,28.308,25.306,25.124,28.49L25.124,28.49z M61.485,13.285c4.504,0,8.154,3.651,8.154,8.155c0,4.501-3.65,8.155-8.154,8.155s-8.155-3.653-8.155-8.155 C53.331,16.936,56.981,13.282,61.485,13.285L61.485,13.285z M97.755,28.49c3.187,3.184,3.187,8.35,0.003,11.534 c-3.184,3.184-8.35,3.184-11.534,0c-3.186-3.184-3.186-8.35,0-11.534C89.408,25.306,94.574,25.306,97.755,28.49L97.755,28.49z"/></g></svg>
-        </div>
-        <div class="card">
-            <p>Wind speed: 3.4 m/s</p>
-            <?xml version="1.0" encoding="utf-8"?><svg version="1.1" width="48" height="48" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 74.78" style="enable-background:new 0 0 122.88 74.78" xml:space="preserve"><g><path d="M28.69,53.38c-1.61,0-2.91-1.3-2.91-2.91c0-1.61,1.3-2.91,2.91-2.91h51.37c0.21,0,0.42,0.02,0.62,0.07 c1.84,0.28,3.56,0.8,5.1,1.63c1.7,0.92,3.15,2.19,4.27,3.89c3.85,5.83,3.28,11.24,0.56,15.24c-1.77,2.61-4.47,4.55-7.45,5.57 c-3,1.03-6.32,1.13-9.32,0.03c-4.54-1.66-8.22-5.89-8.76-13.55c-0.11-1.6,1.1-2.98,2.7-3.09c1.6-0.11,2.98,1.1,3.09,2.7 c0.35,4.94,2.41,7.56,4.94,8.48c1.71,0.62,3.67,0.54,5.48-0.08c1.84-0.63,3.48-1.79,4.52-3.32c1.49-2.19,1.71-5.28-0.61-8.79 c-0.57-0.86-1.31-1.51-2.18-1.98c-0.91-0.49-1.97-0.81-3.13-0.99H28.69L28.69,53.38z M15.41,27.21c-1.61,0-2.91-1.3-2.91-2.91 c0-1.61,1.3-2.91,2.91-2.91h51.21c1.17-0.18,2.23-0.5,3.14-0.99c0.87-0.47,1.61-1.12,2.18-1.98c2.32-3.51,2.09-6.6,0.61-8.79 c-1.04-1.53-2.68-2.69-4.52-3.32c-1.81-0.62-3.78-0.7-5.48-0.08c-2.52,0.92-4.59,3.54-4.94,8.48c-0.11,1.6-1.49,2.81-3.09,2.7 c-1.6-0.11-2.81-1.49-2.7-3.09c0.54-7.66,4.22-11.89,8.76-13.55c3-1.09,6.32-0.99,9.32,0.03c2.98,1.02,5.68,2.97,7.45,5.57 c2.72,4,3.29,9.41-0.56,15.24c-1.12,1.7-2.57,2.97-4.27,3.89c-1.54,0.83-3.26,1.35-5.1,1.63c-0.2,0.04-0.41,0.07-0.62,0.07H15.41 L15.41,27.21z M2.91,40.3C1.3,40.3,0,38.99,0,37.39c0-1.61,1.3-2.91,2.91-2.91h107.07c1.17-0.18,2.23-0.5,3.13-0.99 c0.87-0.47,1.61-1.12,2.18-1.98c2.32-3.51,2.09-6.6,0.61-8.79c-1.04-1.53-2.68-2.69-4.52-3.32c-1.81-0.62-3.78-0.7-5.48-0.08 c-2.52,0.92-4.59,3.54-4.94,8.48c-0.11,1.6-1.49,2.81-3.09,2.7c-1.6-0.11-2.81-1.49-2.7-3.09c0.54-7.66,4.22-11.89,8.76-13.55 c3-1.09,6.32-0.99,9.32,0.03c2.98,1.02,5.68,2.97,7.45,5.57c2.72,4,3.29,9.41-0.56,15.24c-1.12,1.7-2.57,2.97-4.27,3.89 c-1.54,0.83-3.26,1.35-5.1,1.63c-0.2,0.04-0.41,0.07-0.62,0.07H2.91L2.91,40.3z"/></g></svg>
-        </div>
-        <div class="card">
-            <p>Wind direction: North</p>
-            <svg id="Layer_1" data-name="Layer 1" width="48" height="48" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 122.88"><title>compass</title><path d="M61.44,0A61.46,61.46,0,1,1,18,18,61.21,61.21,0,0,1,61.44,0ZM77,57.42l-7.23,4.11a7.56,7.56,0,0,1-.25,1.57,8,8,0,0,1-9.75,5.63,8.19,8.19,0,0,1-1.58-.61l-7.66,4.36L81.43,95.23,77,57.42ZM46.55,65.88l7.37-4.19A7.86,7.86,0,0,1,54.16,59a8,8,0,0,1,9.75-5.63,8.28,8.28,0,0,1,2.55,1.2L73,50.82,42.14,28.07l4.41,37.81ZM95.36,27.52a48,48,0,1,0,14,33.92,47.82,47.82,0,0,0-14-33.92Z"/></svg>
-        </div>
-        <div class="card">
-            <p>Amount of rainfall: 10mm</p>
-             <?xml version="1.0" encoding="utf-8"?><svg version="1.1" width="48" height="48" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 81.96 122.88" style="enable-background:new 0 0 81.96 122.88" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M40.95,0c2.64,11.28,5.67,20.29,9.04,26.98c3.37,6.69,8.53,13.94,15.45,21.76l2.98,3.32 c9.04,10.06,13.55,20.15,13.55,30.21c0,11.14-4.02,20.69-12.07,28.65c-8.08,7.96-17.71,11.96-28.93,11.96 c-11.19,0-20.8-4-28.88-11.96C4.03,102.96,0,93.41,0,82.27c0-10.06,4.51-20.15,13.55-30.21l2.98-3.32 c6.91-7.82,12.07-15.07,15.45-21.76C35.34,20.29,38.35,11.28,40.95,0L40.95,0z M13.81,76.29c-0.21-2.28,1.48-4.3,3.76-4.51 c2.29-0.21,4.31,1.48,4.51,3.76c0.52,5.52,1.73,10.61,4.04,15c2.23,4.24,5.55,7.89,10.35,10.7c1.98,1.16,2.64,3.71,1.48,5.68 c-1.16,1.98-3.71,2.64-5.68,1.48c-6.25-3.66-10.58-8.42-13.51-13.99C15.91,88.99,14.43,82.86,13.81,76.29L13.81,76.29L13.81,76.29z"/></g></svg>
-        </div>
+      <div class="card">
+        <p>Temperature: 22 °C</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="48"
+          height="48"
+          shape-rendering="geometricPrecision"
+          text-rendering="geometricPrecision"
+          image-rendering="optimizeQuality"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          viewBox="0 0 131.24 260.79"
+        >
+          <path
+            d="M79.21 99.95V31.54c0-5.73-2.35-10.94-6.13-14.73-3.78-3.78-9-6.13-14.73-6.13s-10.94 2.35-14.73 6.13c-3.78 3.79-6.13 9-6.13 14.73V163.1c-14.45 7.41-24.33 22.46-24.33 39.82 0 24.69 20.01 44.71 44.71 44.71s44.72-20.02 44.72-44.71c0-16.97-9.45-31.73-23.38-39.31V99.95zm-12.23 71.36c13.73 3.95 23.78 16.6 23.78 31.61 0 18.16-14.72 32.88-32.89 32.88-18.16 0-32.89-14.72-32.89-32.88 0-15.01 10.05-27.66 23.79-31.61V55.52c0-11.31 18.21-10.86 18.21 0v115.79zm34.19-134.88v-9.68h25.23c2.67 0 4.84 2.16 4.84 4.84 0 2.67-2.17 4.84-4.84 4.84h-25.23zm0 26.43v-9.68h25.23c2.67 0 4.84 2.17 4.84 4.84s-2.17 4.84-4.84 4.84h-25.23zm0 26.43v-9.68h25.23c2.67 0 4.84 2.17 4.84 4.84s-2.17 4.84-4.84 4.84h-25.23zm0 26.43v-9.68h25.23c2.67 0 4.84 2.17 4.84 4.84s-2.17 4.84-4.84 4.84h-25.23zm0 26.43v-9.68h25.23c2.67 0 4.84 2.17 4.84 4.84 0 2.68-2.17 4.84-4.84 4.84h-25.23zM89.9 154.71c15.58 10.37 25.84 28.09 25.84 48.21 0 31.96-25.91 57.87-57.87 57.87C25.91 260.79 0 234.88 0 202.92c0-20.53 10.69-38.57 26.81-48.84V31.54c0-8.68 3.55-16.56 9.26-22.28C41.79 3.55 49.67 0 58.35 0c8.68 0 16.57 3.55 22.28 9.26 5.72 5.72 9.27 13.6 9.27 22.28v123.17z"
+          />
+        </svg>
+      </div>
+      <div class="card">
+        <p>Humidity: 50 %</p>
+        <?xml version="1.0" encoding="utf-8"?><svg
+          version="1.1"
+          width="48"
+          height="48"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 122.88 90.06"
+          style="enable-background: new 0 0 122.88 90.06"
+          xml:space="preserve"
+        >
+          <g>
+            <path
+              d="M118.64,70.87c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,60,61.13,105.16,29.6,84.54c-6.42-4.2-12.72-8.32-25.36,2.74c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 C99.7,77.81,106,81.93,118.64,70.87L118.64,70.87z M4.24,19.18C3.18,20.11,1.56,20,0.63,18.94c-0.93-1.06-0.82-2.68,0.24-3.61 c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64c6.42,4.2,12.72,8.32,25.36-2.74 c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11-8.1,61.13,37.07,29.6,16.44C23.18,12.24,16.88,8.12,4.24,19.18L4.24,19.18z M4.24,41.88c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 c6.42,4.2,12.72,8.32,25.36-2.74c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,14.6,61.13,59.77,29.6,39.14C23.18,34.94,16.88,30.82,4.24,41.88L4.24,41.88z M4.24,64.58c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 c6.42,4.2,12.72,8.32,25.36-2.74c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,37.3,61.13,82.47,29.6,61.84C23.18,57.64,16.88,53.52,4.24,64.58L4.24,64.58z"
+            />
+          </g>
+        </svg>
+      </div>
+      <div class="card">
+        <p>Air pressure: 100 hPa</p>
+        <?xml version="1.0" encoding="utf-8"?><svg
+          version="1.1"
+          width="48"
+          height="48"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="122.88px"
+          height="122.88px"
+          viewBox="0 0 122.88 122.88"
+          enable-background="new 0 0 122.88 122.88"
+          xml:space="preserve"
+        >
+          <g>
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M61.439,0c33.928,0,61.44,27.513,61.44,61.439c0,33.929-27.513,61.44-61.44,61.44 C27.512,122.88,0,95.368,0,61.439C0,27.513,27.512,0,61.439,0L61.439,0z M45.917,40.282l19.997,36.447 c1.326,1.263,2.336,2.896,2.846,4.796c1.475,5.502-1.791,11.159-7.293,12.634c-5.501,1.474-11.159-1.794-12.634-7.293 c-0.388-1.451-0.446-2.914-0.222-4.309L45.917,40.282L45.917,40.282z M112.652,64.89c0,4.503-3.653,8.156-8.154,8.156 c-4.504,0-8.158-3.653-8.158-8.156c0-4.502,3.654-8.155,8.158-8.155C108.999,56.734,112.652,60.388,112.652,64.89L112.652,64.89z M10.229,64.89c0,4.503,3.651,8.156,8.155,8.156c4.504,0,8.155-3.653,8.155-8.156c0-4.502-3.651-8.155-8.155-8.155 C13.881,56.734,10.229,60.388,10.229,64.89L10.229,64.89z M25.124,28.49c-3.184,3.184-3.184,8.35,0,11.534 c3.184,3.184,8.35,3.184,11.534,0c3.184-3.184,3.184-8.35,0-11.534C33.474,25.306,28.308,25.306,25.124,28.49L25.124,28.49z M61.485,13.285c4.504,0,8.154,3.651,8.154,8.155c0,4.501-3.65,8.155-8.154,8.155s-8.155-3.653-8.155-8.155 C53.331,16.936,56.981,13.282,61.485,13.285L61.485,13.285z M97.755,28.49c3.187,3.184,3.187,8.35,0.003,11.534 c-3.184,3.184-8.35,3.184-11.534,0c-3.186-3.184-3.186-8.35,0-11.534C89.408,25.306,94.574,25.306,97.755,28.49L97.755,28.49z"
+            />
+          </g>
+        </svg>
+      </div>
+      <div class="card">
+        <p>Wind speed: 3.4 m/s</p>
+        <?xml version="1.0" encoding="utf-8"?><svg
+          version="1.1"
+          width="48"
+          height="48"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 122.88 74.78"
+          style="enable-background: new 0 0 122.88 74.78"
+          xml:space="preserve"
+        >
+          <g>
+            <path
+              d="M28.69,53.38c-1.61,0-2.91-1.3-2.91-2.91c0-1.61,1.3-2.91,2.91-2.91h51.37c0.21,0,0.42,0.02,0.62,0.07 c1.84,0.28,3.56,0.8,5.1,1.63c1.7,0.92,3.15,2.19,4.27,3.89c3.85,5.83,3.28,11.24,0.56,15.24c-1.77,2.61-4.47,4.55-7.45,5.57 c-3,1.03-6.32,1.13-9.32,0.03c-4.54-1.66-8.22-5.89-8.76-13.55c-0.11-1.6,1.1-2.98,2.7-3.09c1.6-0.11,2.98,1.1,3.09,2.7 c0.35,4.94,2.41,7.56,4.94,8.48c1.71,0.62,3.67,0.54,5.48-0.08c1.84-0.63,3.48-1.79,4.52-3.32c1.49-2.19,1.71-5.28-0.61-8.79 c-0.57-0.86-1.31-1.51-2.18-1.98c-0.91-0.49-1.97-0.81-3.13-0.99H28.69L28.69,53.38z M15.41,27.21c-1.61,0-2.91-1.3-2.91-2.91 c0-1.61,1.3-2.91,2.91-2.91h51.21c1.17-0.18,2.23-0.5,3.14-0.99c0.87-0.47,1.61-1.12,2.18-1.98c2.32-3.51,2.09-6.6,0.61-8.79 c-1.04-1.53-2.68-2.69-4.52-3.32c-1.81-0.62-3.78-0.7-5.48-0.08c-2.52,0.92-4.59,3.54-4.94,8.48c-0.11,1.6-1.49,2.81-3.09,2.7 c-1.6-0.11-2.81-1.49-2.7-3.09c0.54-7.66,4.22-11.89,8.76-13.55c3-1.09,6.32-0.99,9.32,0.03c2.98,1.02,5.68,2.97,7.45,5.57 c2.72,4,3.29,9.41-0.56,15.24c-1.12,1.7-2.57,2.97-4.27,3.89c-1.54,0.83-3.26,1.35-5.1,1.63c-0.2,0.04-0.41,0.07-0.62,0.07H15.41 L15.41,27.21z M2.91,40.3C1.3,40.3,0,38.99,0,37.39c0-1.61,1.3-2.91,2.91-2.91h107.07c1.17-0.18,2.23-0.5,3.13-0.99 c0.87-0.47,1.61-1.12,2.18-1.98c2.32-3.51,2.09-6.6,0.61-8.79c-1.04-1.53-2.68-2.69-4.52-3.32c-1.81-0.62-3.78-0.7-5.48-0.08 c-2.52,0.92-4.59,3.54-4.94,8.48c-0.11,1.6-1.49,2.81-3.09,2.7c-1.6-0.11-2.81-1.49-2.7-3.09c0.54-7.66,4.22-11.89,8.76-13.55 c3-1.09,6.32-0.99,9.32,0.03c2.98,1.02,5.68,2.97,7.45,5.57c2.72,4,3.29,9.41-0.56,15.24c-1.12,1.7-2.57,2.97-4.27,3.89 c-1.54,0.83-3.26,1.35-5.1,1.63c-0.2,0.04-0.41,0.07-0.62,0.07H2.91L2.91,40.3z"
+            />
+          </g>
+        </svg>
+      </div>
+      <div class="card">
+        <p>Wind direction: North</p>
+        <svg
+          id="Layer_1"
+          data-name="Layer 1"
+          width="48"
+          height="48"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 122.88 122.88"
+        >
+          <title>compass</title>
+          <path
+            d="M61.44,0A61.46,61.46,0,1,1,18,18,61.21,61.21,0,0,1,61.44,0ZM77,57.42l-7.23,4.11a7.56,7.56,0,0,1-.25,1.57,8,8,0,0,1-9.75,5.63,8.19,8.19,0,0,1-1.58-.61l-7.66,4.36L81.43,95.23,77,57.42ZM46.55,65.88l7.37-4.19A7.86,7.86,0,0,1,54.16,59a8,8,0,0,1,9.75-5.63,8.28,8.28,0,0,1,2.55,1.2L73,50.82,42.14,28.07l4.41,37.81ZM95.36,27.52a48,48,0,1,0,14,33.92,47.82,47.82,0,0,0-14-33.92Z"
+          />
+        </svg>
+      </div>
+      <div class="card">
+        <p>Amount of rainfall: 10mm</p>
+        <?xml version="1.0" encoding="utf-8"?><svg
+          version="1.1"
+          width="48"
+          height="48"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 81.96 122.88"
+          style="enable-background: new 0 0 81.96 122.88"
+          xml:space="preserve"
+        >
+          <style type="text/css">
+            .st0 {
+              fill-rule: evenodd;
+              clip-rule: evenodd;
+            }
+          </style>
+          <g>
+            <path
+              class="st0"
+              d="M40.95,0c2.64,11.28,5.67,20.29,9.04,26.98c3.37,6.69,8.53,13.94,15.45,21.76l2.98,3.32 c9.04,10.06,13.55,20.15,13.55,30.21c0,11.14-4.02,20.69-12.07,28.65c-8.08,7.96-17.71,11.96-28.93,11.96 c-11.19,0-20.8-4-28.88-11.96C4.03,102.96,0,93.41,0,82.27c0-10.06,4.51-20.15,13.55-30.21l2.98-3.32 c6.91-7.82,12.07-15.07,15.45-21.76C35.34,20.29,38.35,11.28,40.95,0L40.95,0z M13.81,76.29c-0.21-2.28,1.48-4.3,3.76-4.51 c2.29-0.21,4.31,1.48,4.51,3.76c0.52,5.52,1.73,10.61,4.04,15c2.23,4.24,5.55,7.89,10.35,10.7c1.98,1.16,2.64,3.71,1.48,5.68 c-1.16,1.98-3.71,2.64-5.68,1.48c-6.25-3.66-10.58-8.42-13.51-13.99C15.91,88.99,14.43,82.86,13.81,76.29L13.81,76.29L13.81,76.29z"
+            />
+          </g>
+        </svg>
+      </div>
     </div>
     <div>
-        <label for="timeInterval">Select Time Interval:</label>
-            <select id="timeInterval" onchange="showSelectedValue()">
-                <option value="hour">Hour</option>
-                <option value="day">Day</option>
-                <option value="week">Week</option>
-                <option value="month">Month</option>
-        </select>
+      <label for="timeInterval">Select Time Interval:</label>
+      <select id="timeInterval" onchange="showSelectedValue()">
+        <option selected="selected" value="hour">Hour</option>
+        <option value="day">Day</option>
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+      </select>
     </div>
     <div class="graph-card">
-        <div class="graph">
-            <canvas id="temperature"></canvas>
-        </div>
-        <div class="graph">
-            <canvas id="humidity"></canvas>
-        </div>
+      <div class="graph">
+        <canvas id="temperature"></canvas>
+      </div>
+      <div class="graph">
+        <canvas id="humidity"></canvas>
+      </div>
     </div>
 
     <div class="graph-card">
-        <div class="graph">
-            <canvas id="air_pressure"></canvas>
-        </div>
-        <div class="graph">
-            <canvas id="wind_speed"></canvas>
-        </div>
-        <div class="graph">
-            <canvas id="rain_fall"></canvas>
-        </div>
+      <div class="graph">
+        <canvas id="air_pressure"></canvas>
+      </div>
+      <div class="graph">
+        <canvas id="wind_speed"></canvas>
+      </div>
+      <div class="graph">
+        <canvas id="rain_fall"></canvas>
+      </div>
     </div>
-        <footer>
-            <div class="footer-content">
-                <ul class="footer-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="/about-us">About Us</a></li> <!-- Replace with your actual subdomain URL -->
-                </ul>
-                <ul class="social-links">
-                    <li><a href="https://github.com/Frank-py"><img width=55px height=55px src="github-icon.png" alt="GitHub"></a></li> <!-- Replace with your GitHub profile URL and icon -->
-                    <li><a href="mailto:lenj94002@gmail.com"><img src="email-icon.png" width=55px height=55px alt="Email"></a></li> <!-- Replace with your email address and icon -->
-                </ul>
-            </div>
-            <div class="footer-bottom">
-                &copy; 2016-2023 WVS-Wetter. All rights reserved.
-            </div>
-        </footer>
-            
+    <footer>
+      <div class="footer-content">
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="/about-us">About Us</a></li>
+          <!-- Replace with your actual subdomain URL -->
+        </ul>
+        <ul class="social-links">
+          <li>
+            <a href="https://github.com/Frank-py"
+              ><img
+                width="55px"
+                height="55px"
+                src="github-icon.png"
+                alt="GitHub"
+            /></a>
+          </li>
+          <!-- Replace with your GitHub profile URL and icon -->
+          <li>
+            <a href="mailto:lenj94002@gmail.com"
+              ><img src="email-icon.png" width="55px" height="55px" alt="Email"
+            /></a>
+          </li>
+          <!-- Replace with your email address and icon -->
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2016-2023 WVS-Wetter. All rights reserved.
+      </div>
+    </footer>
+
     <script>
-        // Example data for the graphs
+      // Example data for the graphs
 
-        (async () => {
 
-        var Temperature;
-        var Humidity;
-        var AirPressure;
-        var WindSpeed;
-        var Rainfall;
+      var Temperature;
+      var Humidity;
+      var AirPressure;
+      var WindSpeed;
+      var Rainfall;
 
-        var GustOfWind;
-        var WindDirection;
+      var GustOfWind;
+      var WindDirection;
 
-        async function createGraph(graphType) {
-            let obj;
-            const postdata = {"graphType": graphType, "amount": 10, "interval":"year"};
-            const res = await fetch('sqlconnection.php', {
-                method: 'POST',
-                body: JSON.stringify(postdata),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            obj = await res.json();
-            //console.log(obj);
-            var labels = [];
-            var attributeData = [];
-            for (let i = 0; i < obj.length; i++) {
-                labels.push(obj[i].time);
-                attributeData.push(obj[i][graphType]);
-            }
-            console.log(labels);
-            console.log(attributeData);
-            const data = {
-                labels: labels,
-                datasets: [{
-                    label: graphType,
-                    fill: false,
-                    //backgroundColor: "rgba(220,220,220,0.2)",
-                    borderWidth: 2,
-                    //borderColor: "rgba(220,220,220,1)",
-                    pointBorderColor: "rgba(220,220,220,1)",
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 1,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "rgba(220,220,220,1)",
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointHoverBorderWidth: 2,
-                    backgroundColor: 'rgb(1,193,175)',
-                    borderColor: 'rgb(1,193,175)',
-                    data: attributeData
-                }]
-            };
+      async function currentInfo(informationType) {
+          let obj;
+          const postdata = {"informationType": informationType, "amount": 1, "interval":"day"};
+          const res = await fetch('sqlconnection.php', {
+              method: 'POST',
+              body: JSON.stringify(postdata),
+              headers: {
+                  'Content-Type': 'application/json',
+              }
+          });
+          obj = await res.json();
 
-            const config = {
-                type: 'line',
-                data: data,
-                options: {
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: 'rgb(1,193,175)'
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            border: {
-                                color: "rgb(1,193,175)", // this here
-                            },
-                            ticks: {
-                                color: "rgb(1,193,175)", // this here
-                            },
-                            grid: {
-                                //display: false,
-                                tickColor: "rgb(1,193,175)" // this her
-                            }
-                                                        
-                        },
-                        y: {
-                            ticks: {
-                                color: "rgb(1,193,175)", // this here
-                            },
-                            grid: {
-                                //display: false,
-                                tickColor: "rgb(1,193,175)" // this her
-                            },
-                            border: {
-                                color: "rgb(1,193,175)", // this here
-                            },
 
-                        },
-                    }
-                }
-            };
+          /* var config;
+      config = await createGraph("temperature");
+      Temperature = new Chart(
+          document.getElementById('temperature'),
+          config
+      ); */
+      }
 
-            return config;
-        }
-        async function updateChart(graphTypestr, graph) {
-            let obj;
-            const res = await fetch(`http://localhost:8000/data?graphType=${graphTypestr}`, {});
-            obj = await res.json();
-            if (obj.slice(-1).Timestamp != graph.data.labels.slice(-1)[0]) {
-                graph.data.datasets[0].data.push(obj.slice(-1).temperature);
-                graph.update();
-            }
-        }
-        async function changeChart(graphTypestr,  graph, amount, interval) {
-            let obj;
-            const postdata = {"graphType": graphType, "amount": amount, "interval": interval};
-            const res = await fetch('sqlconnection.php', {
-                method: 'POST',
-                body: JSON.stringify(postdata),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            obj = await res.json();
-            var labels = [];
-            var attributeData = [];
-            for (let i = 0; i < obj.length; i++) {
-                labels.push(obj[i].time);
-                attributeData.push(obj[i][graphType]);
-            }
-        }
-        var config;
-        config = await createGraph("temperature");
-        Temperature = new Chart(
-            document.getElementById('temperature'), 
-            config
-        );alt(document.getElementById('humidity'),
-            config
-        );
-        config = await createGraph("air_pressure");
-        AirPressure = new Chart(document.getElementById('air_pressure'),
-            config
-        );
-        config = await createGraph("wind_speed")
-        WindSpeed = new Chart(document.getElementById('wind_speed'),
-            config
-        );
-        config = await createGraph("rainfall")
-        Rainfall = new Chart(document.getElementById('rainfall'),
-            config
-        );
+      async function createGraph(graphType) {
+          let obj;
+          const postdata = {"graphType": graphType, "amount": 10, "interval":"year"};
+          const res = await fetch('sqlconnection.php', {
+              method: 'POST',
+              body: JSON.stringify(postdata),
+              headers: {
+                  'Content-Type': 'application/json',
+              }
+          });
+          obj = await res.json();
+          //console.log(obj);
+          var labels = [];
+          var attributeData = [];
+          for (let i = 0; i < obj.length; i++) {
+              labels.push(obj[i].time);
+              attributeData.push(obj[i][graphType]);
+          }
+          //console.log(labels);
+          //console.log(attributeData);
+          const data = {
+              labels: labels,
+              datasets: [{
+                  label: graphType,
+                  fill: false,
+                  //backgroundColor: "rgba(220,220,220,0.2)",
+                  borderWidth: 2,
+                  //borderColor: "rgba(220,220,220,1)",
+                  pointBorderColor: "rgba(220,220,220,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(220,220,220,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  backgroundColor: 'rgb(1,193,175)',
+                  borderColor: 'rgb(1,193,175)',
+                  data: attributeData
+              }]
+          };
 
-        //setInterval(function () {updateChart("temperature", Temperature);}, 3000);
-        //setInterval(function () {updateChart("humidity", Humidity);}, 3000);
-        //setInterval(function () {updateChart("wind_speed", WindSpeed);}, 3000);
-        //setInterval(function () {updateChart("rain_fall", Rainfall);}, 3000);
+          const config = {
+              type: 'line',
+              data: data,
+              options: {
+                  plugins: {
+                      legend: {
+                          labels: {
+                              color: 'rgb(1,193,175)'
+                          }
+                      }
+                  },
+                  scales: {
+                      x: {
+                          border: {
+                              color: "rgb(1,193,175)", // this here
+                          },
+                          ticks: {
+                              color: "rgb(1,193,175)", // this here
+                          },
+                          grid: {
+                              //display: false,
+                              tickColor: "rgb(1,193,175)" // this her
+                          }
 
-        })();
-        function showSelectedValue() {
-            //alert("test");
-            var selectElement = document.getElementById("timeInterval");
-            var selectedValue = selectElement.value;
-        }
-</script>
-    </body>
-    
-    </html>
+                      },
+                      y: {
+                          ticks: {
+                              color: "rgb(1,193,175)", // this here
+                          },
+                          grid: {
+                              //display: false,
+                              tickColor: "rgb(1,193,175)" // this her
+                          },
+                          border: {
+                              color: "rgb(1,193,175)", // this here
+                          },
+
+                      },
+                  }
+              }
+          };
+
+          return config;
+      }
+      async function updateChart(graphTypestr, graph) {
+          let obj;
+          const res = await fetch(`http://localhost:8000/data?graphType=${graphTypestr}`, {});
+          obj = await res.json();
+          if (obj.slice(-1).Timestamp != graph.data.labels.slice(-1)[0]) {
+              graph.data.datasets[0].data.push(obj.slice(-1).temperature);
+              graph.update();
+          }
+      }
+      async function changeChart(graphTypestr, graph, amount, interval) {
+          let obj;
+          const postdata = {"graphType": graphTypestr, "amount": amount, "interval": interval};
+          const res = await fetch('sqlconnection.php', {
+              method: 'POST',
+              body: JSON.stringify(postdata),
+              headers: {
+                  'Content-Type': 'application/json',
+              }
+          });
+          obj = await res.json();
+          var labels = [];
+          var attributeData = [];
+          for (let i = 0; i < obj.length; i++) {
+              labels.push(obj[i].time);
+              attributeData.push(obj[i][graphTypestr]);
+          }
+          //console.log(labels, attributeData);
+          console.log(graph.data.datasets[0].data);
+          graph.data.datasets[0].data = attributeData;
+          graph.data.labels = labels;
+          graph.update();
+      }
+      (async () => {
+
+
+      var config;
+      config = await createGraph("temperature");
+      Temperature = new Chart(
+          document.getElementById('temperature'),
+          config
+      );
+
+      var config;
+      config = await createGraph("humidity");
+      Humidity = new Chart(document.getElementById('humidity'),
+          config
+      );
+      config = await createGraph("air_pressure");
+      AirPressure = new Chart(document.getElementById('air_pressure'),
+          config
+      );
+      config = await createGraph("wind_speed")
+      WindSpeed = new Chart(document.getElementById('wind_speed'),
+          config
+      );
+      //config = await createGraph("rainfall")
+      //Rainfall = new Chart(document.getElementById('rainfall'),
+      //    config
+      //);
+
+      //setInterval(function () {updateChart("temperature", Temperature);}, 3000);
+      //setInterval(function () {updateChart("humidity", Humidity);}, 3000);
+      //setInterval(function () {updateChart("wind_speed", WindSpeed);}, 3000);
+      //setInterval(function () {updateChart("rain_fall", Rainfall);}, 3000);
+
+      })();
+
+      function showSelectedValue() {
+          var selectElement = document.getElementById("timeInterval");
+          var selectedValue = selectElement.value;
+          changeChart("temperature", Temperature, 20, "year").then();
+          changeChart("humidity", Humidity, 20, "year").then();
+          changeChart("air_pressure", AirPressure, 20, "year").then();
+          changeChart("wind_speed", WindSpeed, 20, "year").then();
+          //changeChart("rainfall", Rainfall, 20, "year").then();
+      }
+    </script>
+  </body>
+</html>

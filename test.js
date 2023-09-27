@@ -11,7 +11,9 @@ app.use(cors({
 }));
 app.get("/data", async function (req, res) {
     graphType = req.query.graphType;
-    const data = await getData(graphType);
+    amount = req.query.amount;
+    interval = req.query.interval;
+    const data = await getData(graphType, amount, interval);
     res.send(JSON.stringify(data));
 });
 //const pool = mariadb.createPool({
@@ -24,16 +26,18 @@ app.listen(port, function () {
   console.log(`Example app listening on port ${port}!`);
 });
 const pool = mariadb.createPool({
-    host: "localhost",
-    user: "admin",
-    password: "4sdf38§$/WE3/FW§459fd2w3",
-    database: "Wetter"
+    user: "***REMOVED***",
+    password: "***REMOVED***",
+    host: "***REMOVED***",
+    port: ***REMOVED***,
+    database: "***REMOVED***"
 });
-async function getData (graphType) {
+async function getData (graphType, amount, interval) {
     let conn;
     try {
         conn = await pool.getConnection();
-    	const rows = await conn.query(`SELECT ${graphType}, Timestamp FROM WeatherData LIMIT 5`);
+        console.log(graphType);
+    	const rows = await conn.query(`SELECT ${graphType}, timestamp FROM WeatherData WHERE Timestamp > DATE_SUB(NOW(), INTERVAL ${amount} ${interval})`);
     	//const rows = await conn.query("SELECT * FROM Data LIMIT 5");
 	return rows;
     } catch (err) {

@@ -63,7 +63,7 @@ while True:
         "iaq_index": iaq_index,
         "temperature": temperature, # 100 °C   
         "humidity": humidity,  # 100°C     
-        "air_pressure": air_pressure, # 100hpa        7 graph info
+        "air_pressure": air_pressure/100, # 100hpa        7 graph info
         "r_temperature": data[0],   # 10 °C           1 graph info i
         "r_humidity": data[1],      # %               2 graph info
         "r_wind_speed": data[2]*10,    # 1/10 m/s     3 graph info
@@ -133,5 +133,5 @@ while True:
 #        "lastchange": data[-1]
 #    }
 #if __name__ == "__main__":
-#    app.run( host="localhost", port=80)
+#    app.run(host="0.0.0.0", port=80)
 #

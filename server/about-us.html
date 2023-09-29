@@ -38,93 +38,110 @@
             max-width: 100%;
             height: auto;
         }
-        footer {
-            background-color: #1C1C1E; /* Footer background color */
-            color: #fff; /* Footer text color */
-            text-align: center;
-            padding: 10px;
-            width: 100%; /* Spread over the entire screen */
-            position: absolute;
-            bottom: 0;
-        }
-        .footer-content {
-            text-decoration: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .footer-links, .social-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.7); /* Text color for links */
-            color: rgba(255, 255, 255, 0.7); /* Text color for links */
-        }
-        .footer-links li, .social-links li {
-            text-decoration: none;
-            display: inline;
-            margin-right: 20px;
-            color: rgba(255, 255, 255, 0.7); /* Text color for links */
-        }
-        .footer-links li a {
+
+            footer {
+                bottom: 0;
+                width: 100%;
                 color: rgba(255, 255, 255, 0.7);
+                text-align: center;
+                padding: 10px;
+            }
+
+            /* Style for the footer links */
+            .footer-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .footer-links {
+                list-style: none;
+                padding: 0;
+                margin-left: 2vw;
+            }
+
+            .footer-links li {
+                display: inline;
+                margin-right: 20px;
+            }
+
+            .footer-links a {
                 text-decoration: none;
-                transition: color 0.3s; /* Add a smooth transition effect for the color change */
+                color: rgba(255, 255, 255, 0.7);
+                transition: color 0.3s;
             }
 
-            .footer-links li a:hover {
-                color: #ffffff; /* Change the color on hover to white or your desired color */
+            .footer-links a:hover {
+                color: rgba(255, 255, 255, 0.9);
             }
-        .footer-bottom {
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.7); /* Text color for links */
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1 style="text-align: center;">About Us</h1>
-        <div class="image-container">
-            <p>Wir sind Schüler des Werner von Siemens Gymnasiums. Unsere Reise begann, als wir im Rahmen der Forscher AG eine Wetterstation bauten. Mit einem Raspberry Pi und verschiedenen Modulen haben wir eine Wetterstation gebaut, die sowohl aktuelle als auch vergangene Wetterdaten sammeln und grafisch darstellen kann.</p>
-            <img src="your-image.jpg" alt="Weather Station" width="300" height="200">
-        </div>
-        <p>Unser Team besteht aus:</p>
-        <div class="team-member">
-            <h2>Quint</h2>
-            <p>Keine Ahnung</p>
-        </div>
-        <div class="team-member">
-            <h2>Valentin</h2>
-            <p>Keine Ahnung</p>
-        </div>
-        <div class="team-member">
-            <h2>Daniel</h2>
-            <p>Keine Ahnung</p>
-        </div>
-    </div>
 
-    <footer>
-        <div class="footer-content">
-            <ul class="footer-links">
-                <li><a href="#" >Home</a></li>
-                <li><a href="/~daniel/about-us.html" >About Us</a></li>
-                <!-- Replace with your actual subdomain URL -->
-            </ul>
-            <ul class="social-links">
-                <li>
-                    <a href="https://github.com/Frank-py/WetterWebsite"><img width="55px" height="55px" src="github-mark-white.svg" alt="GitHub" /></a>
-                </li>
-                <!-- Replace with your GitHub profile URL and icon -->
-                <li>
-                    <a href="mailto:lenj94002@gmail.com"><img src="email-round-line-icon.svg" width="55px" height="55px" alt="Email" /></a>
-                </li>
-                <!-- Replace with your email address and icon -->
-            </ul>
+            /* Style for the social links */
+            .social-links {
+                list-style: none;
+                padding: 0;
+                margin-right: 2vw;
+            }
+
+            .social-links li {
+                display: inline;
+                margin-left: 20px; /* Adjust spacing between social links */
+            }
+
+            /* Style for the GitHub and email icons */
+            .social-links a {
+                text-decoration: none;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            /* Center the copyright text */
+            .footer-bottom {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 style="text-align: center;">About Us</h1>
+            <div class="image-container">
+                <p>Wir sind Schüler des Werner von Siemens Gymnasiums. Unsere Reise begann, als wir im Rahmen der Forscher AG eine Wetterstation bauten. Mit einem Raspberry Pi und verschiedenen Modulen haben wir eine Wetterstation gebaut, die sowohl aktuelle als auch vergangene Wetterdaten sammeln und grafisch darstellen kann.</p>
+                <img src="your-image.jpg" alt="Weather Station" width="300" height="200">
+            </div>
+            <p>Unser Team besteht aus:</p>
+            <div class="team-member">
+                <h2>Quint</h2>
+                <p>Keine Ahnung</p>
+            </div>
+            <div class="team-member">
+                <h2>Valentin</h2>
+                <p>Keine Ahnung</p>
+            </div>
+            <div class="team-member">
+                <h2>Daniel</h2>
+                <p>Keine Ahnung</p>
+            </div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2016-2023 WVS-Wetter. All rights reserved.
-        </div>
-    </footer>
-</body>
+
+        <footer>
+            <div class="footer-content">
+                <ul class="footer-links">
+                    <li><a href="/~daniel/index.html" >Home</a></li>
+                    <li><a href="/~daniel/about-us.html" >About Us</a></li>
+                    <!-- Replace with your actual subdomain URL -->
+                </ul>
+                <ul class="social-links">
+                    <li>
+                        <a href="https://github.com/Frank-py/WetterWebsite"><img width="55px" height="55px" src="github-mark-white.svg" alt="GitHub" /></a>
+                    </li>
+                    <!-- Replace with your GitHub profile URL and icon -->
+                    <li>
+                        <a href="mailto:lenj94002@gmail.com"><img src="email-round-line-icon.svg" width="55px" height="55px" alt="Email" /></a>
+                    </li>
+                    <!-- Replace with your email address and icon -->
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2016-2023 WVS-Wetter. All rights reserved.
+            </div>
+        </footer>
+    </body>
 </html>

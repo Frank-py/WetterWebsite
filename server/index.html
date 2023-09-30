@@ -175,6 +175,7 @@
                     #282829;
                 /* #149cc2 */
                 /* #333; */
+                font-size: 20px;
                 border-radius: 5px;
                 padding: 20px;
                 margin: 10px;
@@ -265,42 +266,28 @@
     <div class="subtitle">Wetter vom Siemens</div>
     <div class="header">
         <div class="card">
-            <p id="tempid"></p>
-            <img src="temperature-2-256.png" width="48" height="48">
+            <p id="tempid">Temperatur:<br></p>
+            <img src="temperature-2-256.png" width="40" height="40">
         </div>
         <div class="card">
-            <p id="humidid"></p>
-            <?xml version="1.0" encoding="utf-8"?><svg version="1.1" width="48" height="48" id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 122.88 90.06" style="enable-background: new 0 0 122.88 90.06" xml:space="preserve">
-                <g>
-                    <path
-                        d="M118.64,70.87c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,60,61.13,105.16,29.6,84.54c-6.42-4.2-12.72-8.32-25.36,2.74c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 C99.7,77.81,106,81.93,118.64,70.87L118.64,70.87z M4.24,19.18C3.18,20.11,1.56,20,0.63,18.94c-0.93-1.06-0.82-2.68,0.24-3.61 c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64c6.42,4.2,12.72,8.32,25.36-2.74 c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11-8.1,61.13,37.07,29.6,16.44C23.18,12.24,16.88,8.12,4.24,19.18L4.24,19.18z M4.24,41.88c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 c6.42,4.2,12.72,8.32,25.36-2.74c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,14.6,61.13,59.77,29.6,39.14C23.18,34.94,16.88,30.82,4.24,41.88L4.24,41.88z M4.24,64.58c-1.06,0.93-2.68,0.82-3.61-0.24 c-0.93-1.06-0.82-2.68,0.24-3.61c15.57-13.62,23.47-8.45,31.53-3.18c27.37,17.9,29.35-27.26,60.87-6.64 c6.42,4.2,12.72,8.32,25.36-2.74c1.06-0.93,2.68-0.82,3.61,0.24c0.93,1.06,0.82,2.68-0.24,3.61c-15.57,13.62-23.47,8.45-31.53,3.18 C63.11,37.3,61.13,82.47,29.6,61.84C23.18,57.64,16.88,53.52,4.24,64.58L4.24,64.58z" />
-                </g>
-            </svg>
+            <p id="humidid">Luftfeuchtigkeit:<br></p>
+            <img src="water-wave-icon.png" width="40" height="40">
         </div>
         <div class="card">
-            <p id="airid"></p>
-            <img src="pressure-256.png" width="48" height="48">
+            <p id="airid">Luftdruck:<br></p>
+            <img src="pressure-256.png" width="40" height="40">
         </div>
         <div class="card">
-            <p id="windspeedid"></p>
-            <?xml version="1.0" encoding="utf-8"?><svg version="1.1" width="48" height="48" id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 122.88 74.78" style="enable-background: new 0 0 122.88 74.78" xml:space="preserve">
-                <g>
-                    <path
-                        d="M28.69,53.38c-1.61,0-2.91-1.3-2.91-2.91c0-1.61,1.3-2.91,2.91-2.91h51.37c0.21,0,0.42,0.02,0.62,0.07 c1.84,0.28,3.56,0.8,5.1,1.63c1.7,0.92,3.15,2.19,4.27,3.89c3.85,5.83,3.28,11.24,0.56,15.24c-1.77,2.61-4.47,4.55-7.45,5.57 c-3,1.03-6.32,1.13-9.32,0.03c-4.54-1.66-8.22-5.89-8.76-13.55c-0.11-1.6,1.1-2.98,2.7-3.09c1.6-0.11,2.98,1.1,3.09,2.7 c0.35,4.94,2.41,7.56,4.94,8.48c1.71,0.62,3.67,0.54,5.48-0.08c1.84-0.63,3.48-1.79,4.52-3.32c1.49-2.19,1.71-5.28-0.61-8.79 c-0.57-0.86-1.31-1.51-2.18-1.98c-0.91-0.49-1.97-0.81-3.13-0.99H28.69L28.69,53.38z M15.41,27.21c-1.61,0-2.91-1.3-2.91-2.91 c0-1.61,1.3-2.91,2.91-2.91h51.21c1.17-0.18,2.23-0.5,3.14-0.99c0.87-0.47,1.61-1.12,2.18-1.98c2.32-3.51,2.09-6.6,0.61-8.79 c-1.04-1.53-2.68-2.69-4.52-3.32c-1.81-0.62-3.78-0.7-5.48-0.08c-2.52,0.92-4.59,3.54-4.94,8.48c-0.11,1.6-1.49,2.81-3.09,2.7 c-1.6-0.11-2.81-1.49-2.7-3.09c0.54-7.66,4.22-11.89,8.76-13.55c3-1.09,6.32-0.99,9.32,0.03c2.98,1.02,5.68,2.97,7.45,5.57 c2.72,4,3.29,9.41-0.56,15.24c-1.12,1.7-2.57,2.97-4.27,3.89c-1.54,0.83-3.26,1.35-5.1,1.63c-0.2,0.04-0.41,0.07-0.62,0.07H15.41 L15.41,27.21z M2.91,40.3C1.3,40.3,0,38.99,0,37.39c0-1.61,1.3-2.91,2.91-2.91h107.07c1.17-0.18,2.23-0.5,3.13-0.99 c0.87-0.47,1.61-1.12,2.18-1.98c2.32-3.51,2.09-6.6,0.61-8.79c-1.04-1.53-2.68-2.69-4.52-3.32c-1.81-0.62-3.78-0.7-5.48-0.08 c-2.52,0.92-4.59,3.54-4.94,8.48c-0.11,1.6-1.49,2.81-3.09,2.7c-1.6-0.11-2.81-1.49-2.7-3.09c0.54-7.66,4.22-11.89,8.76-13.55 c3-1.09,6.32-0.99,9.32,0.03c2.98,1.02,5.68,2.97,7.45,5.57c2.72,4,3.29,9.41-0.56,15.24c-1.12,1.7-2.57,2.97-4.27,3.89 c-1.54,0.83-3.26,1.35-5.1,1.63c-0.2,0.04-0.41,0.07-0.62,0.07H2.91L2.91,40.3z" />
-                </g>
-            </svg>
+            <p id="windspeedid">Windgeschwindigkeit:<br></p>
+            <img src="wind-icon.png" width="66" height="40">
         </div>
         <div class="card">
-            <p id="winddirid"></p>
-            <img src="compass-3-256.png" width="48" height="48">
+            <p id="winddirid">Windrichtung:<br></p>
+            <img src="compass-3-256.png" width="40" height="40">
         </div>
         <div class="card">
-            <p id="rainid"></p>
-                <img src="rain-256.png" width="48" height="48">
+            <p id="rainid">Niederschlagsmenge:<br></p>
+                <img src="rain-256.png" width="40" height="40">
         </div>
     </div>
     <div style="text-align: center;">
@@ -336,6 +323,7 @@
         // Example data for the graphs
 
         var translation = { "temperature": "Temperatur", "humidity": "Luftfeuchtigkeit", "air_pressure": "Luftdruck", "wind_speed": "Windgeschwindigkeit", "rainfall": "Niederschlag" };
+        var translationdir = {"East": "Osten", "North": "Norden", "West": "Westen", "South": "Süden"}
         var Temperature;
         var Humidity;
         var AirPressure;
@@ -357,22 +345,22 @@
             });
             obj = await res.json();
             obj[0].temperature = obj[0].temperature / 10 + " °C";
-            document.getElementById("tempid").innerHTML = "Temperatur:\n" + obj[0].temperature;
+            document.getElementById("tempid").innerHTML = document.getElementById("tempid").innerHTML + obj[0].temperature;
 
             obj[0].humidity = obj[0].humidity + " %";
-            document.getElementById("humidid").innerHTML = "Luftfeuchtigkeit:\n" + obj[0].humidity;
+            document.getElementById("humidid").innerHTML = document.getElementById("humidid").innerHTML + obj[0].humidity;
 
             obj[0].air_pressure = obj[0].air_pressure + " hPa";
-            document.getElementById("airid").innerHTML = "Luftdruck:\n" + obj[0].air_pressure;
+            document.getElementById("airid").innerHTML = document.getElementById("airid").innerHTML + obj[0].air_pressure;
 
             obj[0].wind_speed = obj[0].wind_speed + " m/s";
-            document.getElementById("windspeedid").innerHTML = "Windgeschwindigkeit:\n" + obj[0].wind_speed;
+            document.getElementById("windspeedid").innerHTML = document.getElementById("windspeedid").innerHTML + obj[0].wind_speed;
 
             obj[0].wind_direction = obj[0].direction;
-            document.getElementById("winddirid").innerHTML = "Windrichtung:\n" + obj[0].wind_direction;
+            document.getElementById("winddirid").innerHTML = document.getElementById("winddirid").innerHTML + translationdir[obj[0].wind_direction];
 
             obj[0].rainfall = obj[0].rainfall + " mm";
-            document.getElementById("rainid").innerHTML = "Niederschlagsmenge:\n" + obj[0].rainfall;
+            document.getElementById("rainid").innerHTML = document.getElementById("rainid").innerHTML + obj[0].rainfall;
             return;
 
             /* var config;

@@ -15,31 +15,28 @@
         }
 
         select {
-            /* Reset */
             appearance: none;
             border: 0;
             outline: 0;
             font: inherit;
-            /* Personalize */
-            width: 7rem;
+            width: 8%;
             height: 2.5rem;
             background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
                 linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
             color: rgba(255, 255, 255, 0.85);
             border-radius: 0.25em;
             box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+            font-size: 1.2vw;
             cursor: pointer;
 
             &::-ms-expand {
                 display: none;
             }
 
-            /* Remove focus outline */
             &:focus {
                 outline: none;
             }
 
-            /* <option> colors */
             option {
                 color: inherit;
                 background-color: var(--bg);
@@ -53,26 +50,24 @@
         .title {
             text-align: center;
             font-family: "Arial", sans-serif;
-            font-size: 40px;
+            font-size: 2.7vw;
             color: blue;
-            /* Blue color */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            letter-spacing: 2px;
-            /* text-transform: uppercase; */
+            text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.1vw;
         }
 
         .subtitle {
             text-align: center;
             font-family: "Arial", sans-serif;
-            font-size: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            letter-spacing: 2px;
+            font-size: 1.3vw;
+            text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.1vw;
         }
 
         .header {
             display: flex;
             justify-content: space-between;
-            padding: 20px;
+            padding: 2vw;
         }
 
         .card {
@@ -83,15 +78,15 @@
                 /* #149cc2 */
                 white;
             border-radius: 5px;
-            padding: 20px;
-            margin: 10px;
-            width: calc(14.28% - 20px);
+            padding: 2vw;
+            margin: 1vw;
+            width: calc(14.28% - 20vw);
             text-align: center;
         }
 
         .sun-icon {
-            font-size: 50px;
-            margin-bottom: 10px;
+            font-size: 4vw;
+            margin-bottom: 1vw;
         }
 
         .graph-card {
@@ -102,9 +97,11 @@
         .graph {
             border: 1px solid #ccc;
             border-radius: 5px;
-            padding: 20px;
-            margin: 10px;
+            padding: 1vw;
+            margin: 0.7vw;
             flex: 1;
+            width: 40vw;
+            height: 40vh;
         }
 
 
@@ -113,7 +110,7 @@
         .compass-icon,
         .humidity-icon {
 
-            font-size: 48px;
+            font-size: 3.5vw;
         }
 
         .light-mode {
@@ -125,7 +122,7 @@
         .dark-mode {
             background-color: #1C1C1E;
             color: rgba(255, 255, 255, 0.85);
-            font-size: 17px;
+            font-size: 1.1vw;
 
 
             #timeInterval option[value=hour] {
@@ -165,6 +162,9 @@
                 background-color:
                     #282829;
                 /* color: #1C1C1E; */
+                position: relative;
+                height: 40vh;
+                width: 40vw;
             }
 
             .card {
@@ -216,6 +216,7 @@
                 align-items: center;
             }
 
+
             .footer-links {
                 list-style: none;
                 padding: 0;
@@ -223,7 +224,7 @@
             }
 
             .footer-links li {
-                display: inline;
+                display: inline-block;
                 margin-right: 20px;
             }
 
@@ -304,6 +305,7 @@
     </div>
     <div class="graph-card">
         <div class="graph">
+
             <canvas id="temperature"></canvas>
         </div>
         <div class="graph">

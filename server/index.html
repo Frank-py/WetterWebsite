@@ -45,8 +45,9 @@
 
         body {
             font-family: Arial, sans-serif;
+            min-height: 100%;
         }
-
+        
         .title {
             text-align: center;
             font-family: "Arial", sans-serif;
@@ -119,6 +120,7 @@
         }
 
         .dark-mode {
+
             background-color: #1C1C1E;
             color: rgba(255, 255, 255, 0.85);
             font-size: 1.1vw;
@@ -144,7 +146,9 @@
                 color: rgba(255, 255, 255, 0.85);
             }
 
-
+            .allbutfooter {
+                min-height: calc(100vh - 40px);
+            }
             .title {
                 color: rgba(255, 255, 255, 0.9);
             }
@@ -200,9 +204,8 @@
 
         }
 
-            .footer {
+            footer {
                 bottom: 0;
-                position: fixed;
                 width: 100%;
             }
             .footer-content {
@@ -251,6 +254,7 @@
 </head>
 
 <body class="dark-mode">
+    <div class="allbutfooter">
     <div class="title">WvS-Wetter</div>
     <div class="subtitle">Wetter vom Siemens</div>
     <div class="header">
@@ -554,8 +558,8 @@
 
 
     <!-- <button id="toggle-dark-mode">Toggle Dark Mode</button>-->
-</body>
-    <div class="footer">
+        </div>
+    <footer class="footer">
         <div class="footer-content">
             <div class="footer-links">
                 <a href="#">Home</a></li>
@@ -571,5 +575,6 @@
         <div class="footer-bottom">
             &copy; 2016-2023 WVS-Wetter. All rights reserved.
         </div>
-    </div>
+    </footer>
+    </body>
 </html>

@@ -19,7 +19,7 @@
             border: 0;
             outline: 0;
             font: inherit;
-            width: 8%;
+            width: 10%;
             height: 2.5rem;
             background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
                 linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
@@ -28,6 +28,7 @@
             box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
             font-size: 1.2vw;
             cursor: pointer;
+            background-color: #1c1c1E;
 
             &::-ms-expand {
                 display: none;
@@ -46,15 +47,22 @@
         body {
             font-family: Arial, sans-serif;
             min-height: 100%;
+            background-color: #1C1C1E;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1vw;
         }
 
         .title {
             text-align: center;
             font-family: "Arial", sans-serif;
             font-size: 3vw;
-            color: blue;
             text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
             letter-spacing: 0.1vw;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .allbutfooter {
+            min-height: calc(100vh - 4vw);
         }
 
         .subtitle {
@@ -63,6 +71,7 @@
             font-size: 1.5vw;
             text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
             letter-spacing: 0.1vw;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .header {
@@ -84,21 +93,34 @@
         }
 
         .graph {
-            border: 1px solid #ccc;
+            position: relative;
             border-radius: 5px;
             padding: 1vw;
             margin: 0.7vw;
             flex: 1;
+            border: 0px solid rgba(255, 255, 255, 0.15);
+            background-color: #282829;
+            width: 40vw;
+            height: 32vh;
         }
         .graph-top {
-            border: 1px solid #ccc;
+            position: relative;
             border-radius: 5px;
             padding: 1vw;
             margin: 0.7vw;
             flex: 1;
+            border: 0px solid rgba(255, 255, 255, 0.15);
+            background-color: #282829;
+            width: 40vw;
+            height: 50vh;
         }
 
-
+        .graph:hover {
+            background-color: #2C2C2E;
+        }
+        .graph-top:hover {
+            background-color: #2C2C2E;
+        }
 
         .wind-icon,
         .rain-icon,
@@ -107,128 +129,54 @@
 
             font-size: 0.1vw; /* ?????? */
         }
-
-        .dark-mode {
-
-            background-color: #1C1C1E;
+        #timeInterval option[value=hour] {
+            background-color: #222223;
             color: rgba(255, 255, 255, 0.85);
-            font-size: 1.1vw;
+        }
 
+        #timeInterval option[value=day] {
+            background-color: #222223;
+            color: rgba(255, 255, 255, 0.85);
+        }
 
-            #timeInterval option[value=hour] {
-                background-color: #222223;
-                color: rgba(255, 255, 255, 0.85);
-            }
+        #timeInterval option[value=week] {
+            background-color: #222223;
+            color: rgba(255, 255, 255, 0.85);
+        }
 
-            #timeInterval option[value=day] {
-                background-color: #222223;
-                color: rgba(255, 255, 255, 0.85);
-            }
-
-            #timeInterval option[value=week] {
-                background-color: #222223;
-                color: rgba(255, 255, 255, 0.85);
-            }
-
-            #timeInterval option[value=month] {
-                background-color: #222223;
-                color: rgba(255, 255, 255, 0.85);
-            }
-
-            .allbutfooter {
-                min-height: calc(100vh - 40px);
-            }
-            .title {
-                color: rgba(255, 255, 255, 0.9);
-            }
-
-            .subtitle {
-                color: rgba(255, 255, 255, 0.9);
-            }
-
-            .card {
-
-                border: 1px solid
-                    /* #060483 */
-                    black;
-                background-color:
-                    /* #149cc2 */
-                    white;
-                border-radius: 5px;
-                padding: 2vw;
-                margin: 1vw;
-                width: calc(14.28% - 20vw);
-                text-align: center;
-            }
-            .card p{
-                font-size: 1.2vw;
-            }
-
-            .graph {
-                border: 0px solid
-                    /* #060483 */
-                    rgba(255, 255, 255, 0.15);
-                background-color:
-                    #282829;
-                /* color: #1C1C1E; */
-                position: relative;
-                width: 40vw;
-                height: 32vh;
-            }
-            .graph-top {
-                border: 0px solid
-                    /* #060483 */
-                    rgba(255, 255, 255, 0.15);
-                background-color:
-                    #282829;
-                /* color: #1C1C1E; */
-                position: relative;
-                width: 40vw;
-                height: 50vh;
-            }
-
-            .card {
-                border: 0px solid
-                    /* #060483 */
-                    rgba(255, 255, 255, 0.15);
-                background-color:
-                    #282829;
-                /* #149cc2 */
-                /* #333; */
-                font-size: 20px;
-                border-radius: 5px;
-                padding: 20px;
-                margin: 10px;
-                width: calc(14.28% - 20px);
-                text-align: center;
-            }
-            .card img {
-                opacity: 0.85;
-            }
-
-            .card:hover {
-                background-color: #3A3A3C;
-            }
-
-            .graph:hover {
-                background-color: #2C2C2E;
-            }
-            .graph-top:hover {
-                background-color: #2C2C2E;
-            }
-
-            /* Style for the footer */
-
-            /* Style for the footer */
+        #timeInterval option[value=month] {
+            background-color: #222223;
+            color: rgba(255, 255, 255, 0.85);
+        }
 
 
 
+
+        .card {
+            text-align: center;
+            border: 0px solid rgba(255, 255, 255, 0.15);
+            background-color: #282829;
+            font-size: 1.2vw;
+            border-radius: 5px;
+            padding: 1em;
+            margin: 0.5em;
+            width: calc(14.28% - 1vh);
+        }
+        .card p{
+            font-size: 1.2vw;
+        }
+        .card img {
+            opacity: 0.85;
+        }
+        .card:hover {
+            background-color: #3A3A3C;
         }
 
         footer {
             bottom: 0;
             width: 100%;
         }
+
         .footer-content {
             display: flex;
             justify-content: space-between;
@@ -253,23 +201,18 @@
         .footer-links a:hover {
             color: rgba(255, 255, 255, 0.9);
         }
-
-        /* Style for the social links */
         .social-links {
             list-style: none;
             padding: 0;
             margin-right: 2vw;
         }
 
-
-        /* Style for the GitHub and email icons */
         .social-links a {
             font-size: 1.1vw;
             text-decoration: none;
             color: rgba(255, 255, 255, 0.85);
         }
 
-        /* Center the copyright text */
         .footer-bottom {
             font-size: 1.1vw;
             text-align: center;
@@ -431,7 +374,7 @@ if (hasTouchScreen) {
                 for (let i = 0; i < obj.length; i++) {
                     originalDate = new Date(obj[i].time);
 
-            day = originalDate.getDay();
+                    day = originalDate.getDay();
                     month = originalDate.getMonth();
                     hour = originalDate.getHours();
                     var startDate = new Date(originalDate.getFullYear(), 0, 1);
@@ -525,37 +468,37 @@ if (hasTouchScreen) {
             async function changeChart(graphTypestr, graph, amount, interval) {
                 let obj;
                 const postdata = { "graphType": graphTypestr, "amount": amount, "interval": interval };
-            const res = await fetch('sqlconnection.php', {
-                method: 'POST',
-                body: JSON.stringify(postdata),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            obj = await res.json();
-            var labels = [];
-            var attributeData = [];
-            var originalDate, day, month, hours, minutes, simplifiedDateString;
-            for (let i = 0; i < obj.length; i++) {
-                originalDate = new Date(obj[i].time);
+                const res = await fetch('sqlconnection.php', {
+                    method: 'POST',
+                    body: JSON.stringify(postdata),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                obj = await res.json();
+                var labels = [];
+                var attributeData = [];
+                var originalDate, day, month, hours, minutes, simplifiedDateString;
+                for (let i = 0; i < obj.length; i++) {
+                    originalDate = new Date(obj[i].time);
 
-                day = originalDate.getDay();
-                month = originalDate.getMonth();
-                hour = originalDate.getHours();
-                var startDate = new Date(originalDate.getFullYear(), 0, 1);
-                var days = Math.floor((originalDate - startDate) /
-                    (24 * 60 * 60 * 1000));
+                    day = originalDate.getDay();
+                    month = originalDate.getMonth();
+                    hour = originalDate.getHours();
+                    var startDate = new Date(originalDate.getFullYear(), 0, 1);
+                    var days = Math.floor((originalDate - startDate) /
+                        (24 * 60 * 60 * 1000));
 
                     var week = Math.ceil(days / 7);
-            var date = {"hour": hour, "day": day, "week": week, "month": month};
+                    var date = {"hour": hour, "day": day, "week": week, "month": month};
                     labels.push(date[interval]);
 
                     labels.push(simplifiedDateString);
                     attributeData.push(obj[i][graphTypestr]);
                 }
                 graph.data.datasets[0].data = attributeData;
-            graph.data.labels = labels;
-            graph.update();
+                graph.data.labels = labels;
+                graph.update();
             }
             (async () => {
 
@@ -589,7 +532,7 @@ if (hasTouchScreen) {
                 //setInterval(function () {updateChart("temperature", Temperature);}, 3000);
                 //setInterval(function () {updateChart("humidity", Humidity);}, 3000);
                 //setInterval(function () {updateChart("wind_speed", WindSpeed);}, 3000);
-            //setInterval(function () {updateChart("rain_fall", Rainfall);}, 3000);
+                //setInterval(function () {updateChart("rain_fall", Rainfall);}, 3000);
 
             })();
 

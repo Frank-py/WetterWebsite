@@ -101,6 +101,14 @@
             margin: 0.7vw;
             flex: 1;
         }
+        .graph-top {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 1vw;
+            margin: 0.7vw;
+            flex: 1;
+        }
+        
 
 
         .wind-icon,
@@ -161,7 +169,19 @@
                     #282829;
                 /* color: #1C1C1E; */
                 position: relative;
-                
+                width: 40vw;
+                height: 33vh;
+            }
+            .graph-top {
+                border: 0px solid
+                    /* #060483 */
+                    rgba(255, 255, 255, 0.15);
+                background-color:
+                    #282829;
+                /* color: #1C1C1E; */
+                position: relative;
+                width: 40vw;
+                height: 38vh;
             }
 
             .card {
@@ -190,6 +210,9 @@
             .graph:hover {
                 background-color: #2C2C2E;
             }
+            .graph-top:hover {
+                background-color: #2C2C2E;
+            }
 
             /* Style for the footer */
 
@@ -201,7 +224,7 @@
 
             .footer {
                 bottom: 0;
-                position: fixed;
+                position: absolute;
                 width: 100%;
             }
             .footer-content {
@@ -288,11 +311,10 @@
         </select>
     </div>
     <div class="graph-card">
-        <div class="graph">
-
+        <div class="graph-top">
             <canvas id="temperature"></canvas>
         </div>
-        <div class="graph">
+        <div class="graph-top">
             <canvas id="humidity"></canvas>
         </div>
     </div>

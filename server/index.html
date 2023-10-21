@@ -197,17 +197,7 @@
             /* Style for the footer */
 
             /* Style for the footer */
-            footer {
-                bottom: 0;
-                width: 100%;
-                color: rgba(255, 255, 255, 0.85);
-                text-align: center;
-                padding: 10px;
-            }
 
-            footer a img {
-                opacity: 0.8;
-            }
             
 
             .footer-content {
@@ -223,10 +213,6 @@
                 margin-left: 2vw;
             }
 
-            .footer-links li {
-                display: inline-block;
-                margin-right: 20px;
-            }
 
             .footer-links a {
                 text-decoration: none;
@@ -245,11 +231,6 @@
                 margin-right: 2vw;
             }
 
-            .social-links li {
-                display: inline;
-                margin-left: 20px;
-                /* Adjust spacing between social links */
-            }
 
             /* Style for the GitHub and email icons */
             .social-links a {
@@ -567,27 +548,23 @@
         }
     </script>
 
-    <footer>
+    <div class="footer">
         <div class="footer-content">
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="/about-us.html">About Us</a></li>
-            </ul>
-            <ul class="social-links">
-                <li>
+            <div class="footer-links">
+                <a href="#">Home</a></li>
+                <a href="/about-us.html">About Us</a></li>
+            </div>
+            <div class="social-links">
                     <a href="https://github.com/Frank-py/WetterWebsite"><img width="55px" height="55px"
                             src="github-mark-white.svg" alt="GitHub" /></a>
-                </li>
-                <li>
                     <a href="mailto:lenj94002@gmail.com"><img src="email-round-line-icon.png" width="55px" height="55px"
                             alt="Email" /></a>
-                </li>
-            </ul>
+            </div>
         </div>
         <div class="footer-bottom">
             &copy; 2016-2023 WVS-Wetter. All rights reserved.
         </div>
-    </footer>
+    </div>
 
     <!-- <button id="toggle-dark-mode">Toggle Dark Mode</button>-->
 </body>

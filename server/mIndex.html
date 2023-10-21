@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wetter vom Siemens</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+        :root {
+            --arrow-bg: rgba(255, 255, 255, 0.1);
+            --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+            --option-bg: white;
+            --select-bg: rgba(255, 255, 255, 0.05);
+        }
+        body {
+            margin: 0;
+        }
+        select {
+            appearance: none;
+            border: 0;
+            outline: 0;
+            font: inherit;
+            width: 8%;
+            height: 2.5rem;
+            background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+                linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+            color: rgba(255, 255, 255, 0.85);
+            border-radius: 0.25em;
+            box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+            font-size: 1.2vw;
+            cursor: pointer;
+
+            &::-ms-expand {
+                display: none;
+            }
+
+            &:focus {
+                outline: none;
+            }
+
+            option {
+                color: inherit;
+                background-color: var(--bg);
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100%;
+        }
+
+        .title {
+            text-align: center;
+            font-family: "Arial", sans-serif;
+            font-size: 15vw;
+            color: blue;
+            text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.1vw;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-family: "Arial", sans-serif;
+            font-size: 7.5vw;
+            text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.1vw;
+        }
+
+        .header {
+            flex-direction: column;
+            align-items: center; /* Center align on mobile */
+            padding: 1vw;
+        }
+
+
+
+        .sun-icon {
+            font-size: 0.2vw; /* ?????? */
+            margin-bottom: 1vw;
+        }
+
+        .graph-card {
+            width: 100%;
+            flex-direction: column; /* Stack graphs in a column on mobile */
+        }
+
+        .graph {
+            width: 100%;
+        }
+
+
+
+        .wind-icon,
+        .rain-icon,
+        .compass-icon,
+        .humidity-icon {
+
+            font-size: 0.1vw; /* ?????? */
+        }
+
+        .dark-mode {
+
+            background-color: #1C1C1E;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1vw;
+
+
+            #timeInterval option[value=hour] {
+                background-color: #222223;
+                color: rgba(255, 255, 255, 0.85);
+            }
+
+            #timeInterval option[value=day] {
+                background-color: #222223;
+                color: rgba(255, 255, 255, 0.85);
+            }
+
+            #timeInterval option[value=week] {
+                background-color: #222223;
+                color: rgba(255, 255, 255, 0.85);
+            }
+
+            #timeInterval option[value=month] {
+                background-color: #222223;
+                color: rgba(255, 255, 255, 0.85);
+            }
+
+            .allbutfooter {
+                min-height: calc(100vh - 40px);
+            }
+            .title {
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .subtitle {
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .card p{
+                font-size: 5vw;
+            }
+
+
+            .card {
+                border: 0px solid
+                    /* #060483 */
+                    rgba(255, 255, 255, 0.15);
+                background-color:
+                    #282829;
+                /* #149cc2 */
+                /* #333; */
+                font-size: 20px;
+                border-radius: 5px;
+                padding: 20px;
+                margin-left: 5%;
+                margin-top: 3vh;
+                margin-bottom: 3vh;
+                width: 80%;
+                text-align: center;
+            }
+            .card img {
+                opacity: 0.85;
+            }
+
+            .card:hover {
+                background-color: #3A3A3C;
+            }
+
+            .graph:hover {
+                background-color: #2C2C2E;
+            }
+
+            /* Style for the footer */
+
+            /* Style for the footer */
+
+
+
+        }
+
+        footer {
+            bottom: 0;
+            width: 100%;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin-left: 2vw;
+        }
+
+
+        .footer-links a {
+            margin-left: 1vw;
+            font-size: 3vw;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Style for the social links */
+        .social-links {
+            
+            list-style: none;
+            padding: 0;
+            margin-right: 2vw;
+        }
+
+
+        /* Style for the GitHub and email icons */
+        .social-links a {
+            margin: 0.5vw;
+            font-size: 1.1vw;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Center the copyright text */
+        .footer-bottom {
+            font-size: 2vw;
+            margin-top: 2vw;
+            text-align: center;
+        }
+        </style>
+    </head>
+
+    <body class="dark-mode">
+        <div class="allbutfooter">
+            <div class="title">WvS-Wetter</div>
+            <div class="subtitle">Wetter vom Siemens</div>
+            <div class="header">
+                <div class="card">
+                    <p id="tempid">Temperatur:<br></p>
+                    <img src="temperature-2-256.png" width="40" height="40">
+                </div>
+                <div class="card">
+                    <p id="humidid">Luftfeuchtigkeit:<br></p>
+                    <img src="water-wave-icon.png" width="40" height="40">
+                </div>
+                <div class="card">
+                    <p id="airid">Luftdruck:<br></p>
+                    <img src="pressure-256.png" width="40" height="40">
+                </div>
+                <div class="card">
+                    <p id="windspeedid">Windgeschwindigkeit:<br></p>
+                    <img src="wind-icon.png" width="66" height="40">
+                </div>
+                <div class="card">
+                    <p id="winddirid">Windrichtung:<br></p>
+                    <img src="compass-3-256.png" width="40" height="40">
+                </div>
+                <div class="card">
+                    <p id="rainid">Niederschlagsmenge:<br></p>
+                    <img src="rain-256.png" width="40" height="40">
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <label style="display: flex; justify-items: center; align-items: center;" for="timeInterval"></label>
+                <select id="timeInterval" onchange="showSelectedValue()">
+                    <option selected="selected" value="hour">Stunde</option>
+                    <option value="day">Tag</option>
+                    <option value="week">Woche</option>
+                    <option value="month">Monat</option>
+                </select>
+            </div>
+            <div class="graph-card">
+                <div class="graph-top">
+                    <canvas id="temperature"></canvas>
+                </div>
+                <div class="graph-top">
+                    <canvas id="humidity"></canvas>
+                </div>
+            </div>
+
+            <div class="graph-card">
+                <div class="graph">
+                    <canvas id="air_pressure"></canvas>
+                </div>
+                <div class="graph">
+                    <canvas id="wind_speed"></canvas>
+                </div>
+                <div class="graph">
+                    <canvas id="rain_fall"></canvas>
+                </div>
+            </div>
+            <script>
+            // Example data for the graphs
+
+            var translation = { "temperature": "Temperatur/ °C", "humidity": "Luftfeuchtigkeit/ %", "air_pressure": "Luftdruck/ hPa", "wind_speed": "Windgeschwindigkeit/ m/s", "rainfall": "Niederschlag/ mm" };
+            var translationdir = {"East": "Osten", "North": "Norden", "West": "Westen", "South": "Süden"}
+            var Temperature;
+            var Humidity;
+            var AirPressure;
+            var WindSpeed;
+            var Rainfall;
+
+            var GustOfWind;
+            var WindDirection;
+
+            async function currentInfo() {
+                let obj;
+                const postdata = { "current": 1 };
+                const res = await fetch('sqlconnection.php', {
+                    method: 'POST',
+                    body: JSON.stringify(postdata),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                obj = await res.json();
+                obj[0].temperature = obj[0].temperature / 10 + " °C";
+                document.getElementById("tempid").innerHTML = document.getElementById("tempid").innerHTML + obj[0].temperature;
+
+                obj[0].humidity = obj[0].humidity + " %";
+                document.getElementById("humidid").innerHTML = document.getElementById("humidid").innerHTML + obj[0].humidity;
+
+                obj[0].air_pressure = obj[0].air_pressure + " hPa";
+                document.getElementById("airid").innerHTML = document.getElementById("airid").innerHTML + obj[0].air_pressure;
+
+                obj[0].wind_speed = obj[0].wind_speed + " m/s";
+                document.getElementById("windspeedid").innerHTML = document.getElementById("windspeedid").innerHTML + obj[0].wind_speed;
+
+                obj[0].wind_direction = obj[0].direction;
+                document.getElementById("winddirid").innerHTML = document.getElementById("winddirid").innerHTML + translationdir[obj[0].wind_direction];
+
+                obj[0].rainfall = obj[0].rainfall + " mm";
+                document.getElementById("rainid").innerHTML = document.getElementById("rainid").innerHTML + obj[0].rainfall;
+                return;
+
+                /* var config;
+                config = await createGraph("temperature");
+                Temperature = new Chart(
+                    document.getElementById('temperature'),
+                    config
+                ); */
+            }
+
+            async function createGraph(graphType) {
+                let obj;
+                const postdata = { "graphType": graphType, "amount": 10, "interval": "year" };
+                const res = await fetch('sqlconnection.php', {
+                    method: 'POST',
+                    body: JSON.stringify(postdata),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                obj = await res.json();
+                var labels = [];
+                var attributeData = [];
+                var originalDate, day, month, hours, minutes, simplifiedDateString;
+
+                for (let i = 0; i < obj.length; i++) {
+                    originalDate = new Date(obj[i].time);
+
+                    day = originalDate.getDay();
+                    month = originalDate.getMonth();
+                    hour = originalDate.getHours();
+                    var startDate = new Date(originalDate.getFullYear(), 0, 1);
+                    var days = Math.floor((originalDate - startDate) /
+                        (24 * 60 * 60 * 1000));
+
+                    var week = Math.ceil(days / 7);
+                    var date = {"hour": hour, "day": day, "week": week, "month": month};
+                    labels.push(date["month"]);
+                    if (graphType === "temperature") {
+                        attributeData.push(obj[i][graphType] / 100);
+                    }
+                    else {
+                        attributeData.push(obj[i][graphType]);
+                    }
+                }
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: translation[graphType],
+                        fill: false,
+                        //backgroundColor: "rgba(220,220,220,0.2)",
+                        borderWidth: 2,
+                        //borderColor: "rgba(220,220,220,1)",
+                        pointBorderColor: "rgba(220,220,220,1)",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 1,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(220,220,220,1)",
+                        pointHoverBorderColor: "rgba(220,220,220,1)",
+                        pointHoverBorderWidth: 2,
+                        backgroundColor: 'rgb(1,193,175)',
+                        borderColor: 'rgb(1,193,175)',
+                        data: attributeData
+                    }]
+                };
+
+                const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        plugins: {
+                            legend: {
+                labels: {
+                                    color: 'rgb(1,193,175)'
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                border: {
+                                    color: "rgb(1,193,175)", // this here
+                                },
+                                ticks: {
+                                    color: "rgb(1,193,175)", // this here
+                                },
+                                grid: {
+                                    //display: false,
+                                    tickColor: "rgb(1,193,175)" // this her
+                                }
+
+                            },
+                            y: {
+                                ticks: {
+                                    color: "rgb(1,193,175)", // this here
+                                },
+                                grid: {
+                                    //display: false,
+                                    tickColor: "rgb(1,193,175)" // this her
+            },
+                                border: {
+                                    color: "rgb(1,193,175)", // this here
+                                },
+
+                            },
+                        }
+                    }
+                };
+
+                return config;
+            }
+            async function updateChart(graphTypestr, graph) {
+                let obj;
+                const res = await fetch(`http://localhost:8000/data?graphType=${graphTypestr}`, {});
+                obj = await res.json();
+                if (obj.slice(-1).Timestamp != graph.data.labels.slice(-1)[0]) {
+                    graph.data.datasets[0].data.push(obj.slice(-1).temperature);
+                    graph.update();
+                }
+            }
+            async function changeChart(graphTypestr, graph, amount, interval) {
+                let obj;
+                const postdata = { "graphType": graphTypestr, "amount": amount, "interval": interval };
+                const res = await fetch('sqlconnection.php', {
+                    method: 'POST',
+                    body: JSON.stringify(postdata),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                obj = await res.json();
+                var labels = [];
+                var attributeData = [];
+                var originalDate, day, month, hours, minutes, simplifiedDateString;
+                for (let i = 0; i < obj.length; i++) {
+                    originalDate = new Date(obj[i].time);
+
+                    day = originalDate.getDay();
+                    month = originalDate.getMonth();
+                    hour = originalDate.getHours();
+                    var startDate = new Date(originalDate.getFullYear(), 0, 1);
+                    var days = Math.floor((originalDate - startDate) /
+                        (24 * 60 * 60 * 1000));
+
+                    var week = Math.ceil(days / 7);
+                    var date = {"hour": hour, "day": day, "week": week, "month": month};
+                    labels.push(date[interval]);
+
+                    labels.push(simplifiedDateString);
+                    attributeData.push(obj[i][graphTypestr]);
+                }
+            graph.data.datasets[0].data = attributeData;
+            graph.data.labels = labels;
+            graph.update();
+            }
+            (async () => {
+
+                await currentInfo();
+
+                var config;
+                config = await createGraph("temperature");
+                Temperature = new Chart(
+                    document.getElementById('temperature'),
+                    config
+                );
+
+                var config;
+                config = await createGraph("humidity");
+                Humidity = new Chart(document.getElementById('humidity'),
+                    config
+                );
+                config = await createGraph("air_pressure");
+                AirPressure = new Chart(document.getElementById('air_pressure'),
+                    config
+                );
+                config = await createGraph("wind_speed")
+                WindSpeed = new Chart(document.getElementById('wind_speed'),
+                    config
+                );
+            config = await createGraph("rainfall")
+            Rainfall = new Chart(document.getElementById('rainfall'),
+                config
+            );
+
+            //setInterval(function () {updateChart("temperature", Temperature);}, 3000);
+            //setInterval(function () {updateChart("humidity", Humidity);}, 3000);
+            //setInterval(function () {updateChart("wind_speed", WindSpeed);}, 3000);
+            //setInterval(function () {updateChart("rain_fall", Rainfall);}, 3000);
+
+            })();
+
+            function showSelectedValue() {
+                var selectElement = document.getElementById("timeInterval");
+                var selectedValue = selectElement.value;
+                changeChart("temperature", Temperature, 20, "month").then();
+                changeChart("humidity", Humidity, 20, "month").then();
+                changeChart("air_pressure", AirPressure, 20, "month").then();
+                changeChart("wind_speed", WindSpeed, 20, "month").then();
+                //changeChart("rainfall", Rainfall, 20, "year").then();
+            }
+            </script>
+
+
+            <!-- <button id="toggle-dark-mode">Toggle Dark Mode</button>-->
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">Home</a></li>
+                    <a href="/about-us.html">About Us</a></li>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/Frank-py/WetterWebsite"><img width="20vw" height="20vh"
+                        src="github-mark-white.svg" alt="GitHub" /></a>
+                    <a href="mailto:lenj94002@gmail.com"><img src="email-round-line-icon.png" width="20vw" height="20vh"
+                        alt="Email" /></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2016-2023 WVS-Wetter. All rights reserved.
+            </div>
+        </footer>
+    </body>
+</html>

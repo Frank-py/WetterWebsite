@@ -216,10 +216,10 @@
             <div style="text-align: center;">
                 <label style="display: flex; justify-items: center; align-items: center;" for="timeInterval"></label>
                 <select id="timeInterval" onchange="showSelectedValue()">
-                    <option selected="selected" value="hour">Stunde</option>
-                    <option value="day">Tag</option>
-                    <option value="week">Woche</option>
-                    <option value="month">Monat</option>
+                    <option selected="selected" value="1 DAY">Tag</option>
+                    <option value="1 MONTH">Monat</option>
+                    <option value="1 YEAR">Jahr</option>
+                    <option value="10 YEAR">10 Jahre</option>
                 </select>
             </div>
             <div class="graph-card">
@@ -239,14 +239,121 @@
                     <canvas id="wind_speed"></canvas>
                 </div>
                 <div class="graph">
-                    <canvas id="rain_fall"></canvas>
+                    <canvas id="rainfall"></canvas>
+                </div>
+            </div>
+<script>
+var hasTouchScreen = false;
+
+if ("maxTouchPoints" in navigator) {
+    hasTouchScreen = navigator.maxTouchPoints > 0;
+} else if ("msMaxTouchPoints" in navigator) {
+    hasTouchScreen = navigator.msMaxTouchPoints > 0;
+} else {
+    var mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+    if (mQ && mQ.media === "(pointer:coarse)") {
+        hasTouchScreen = !!mQ.matches;
+    } else if ('orientation' in window) {
+        hasTouchScreen = true; // deprecated, but good fallback
+    } else {
+        // Only as a last resort, fall back to user agent sniffing
+        var UA = navigator.userAgent;
+        hasTouchScreen = (
+            /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+                /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA)
+        );
+    }
+}
+if (hasTouchScreen) {
+    window.location.href = "/mIndex.html";
+}
+    </script>
+    <body class="dark-mode">
+        <div class="allbutfooter">
+            <div class="title">WvS-Wetter</div>
+            <div class="subtitle">Wetter vom Siemens</div>
+            <div class="header">
+                <div class="card">
+                    <p id="tempid">Temperatur:<br></p>
+                    <img src="temperature-2-256.png" width="40" height="40">
+                </div>
+                <div class="card">
+                    <p id="humidid">Luftfeuchtigkeit:<br></p>
+                    <img src="water-wave-icon.png" width="40" height="40">
+                </div>
+                <div class="card">
+                    <p id="airid">Luftdruck:<br></p>
+                    <img src="pressure-256.png" width="40" height="40">
+                </div>
+                <div class="card">
+                    <p id="windspeedid">Windgeschwindigkeit:<br></p>
+                    <img src="wind-icon.png" width="66" height="40">
+                </div>
+                <div class="card">
+                    <p id="winddirid">Windrichtung:<br></p>
+                    <img src="compass-3-256.png" width="40" height="40">
+                </div>
+                <div class="card">
+                    <p id="rainid">Niederschlagsmenge:<br></p>
+                    <img src="rain-256.png" width="40" height="40">
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <label style="display: flex; justify-items: center; align-items: center;" for="timeInterval"></label>
+                <select id="timeInterval" onchange="showSelectedValue()">
+                    <option selected="selected" value="day">Tag</option>
+                    <option value="month">Monat</option>
+                    <option value="year">Jahr</option>
+                    <option value="decade">10 Jahre</option>
+                </select>
+            </div>
+            <div class="graph-card">
+                <div class="graph-top">
+                    <canvas id="temperature"></canvas>
+                </div>
+                <div class="graph-top">
+                    <canvas id="humidity"></canvas>
+                </div>
+            </div>
+
+            <div class="graph-card">
+                <div class="graph">
+                    <canvas id="air_pressure"></canvas>
+                </div>
+                <div class="graph">
+                    <canvas id="wind_speed"></canvas>
+                </div>
+                <div class="graph">
+                    <canvas id="rainfall"></canvas>
                 </div>
             </div>
             <script>
             // Example data for the graphs
-
             var translation = { "temperature": "Temperatur/ °C", "humidity": "Luftfeuchtigkeit/ %", "air_pressure": "Luftdruck/ hPa", "wind_speed": "Windgeschwindigkeit/ m/s", "rainfall": "Niederschlag/ mm" };
-            var translationdir = {"East": "Osten", "North": "Norden", "West": "Westen", "South": "Süden"}
+            var translationdir = {
+                "East": "Osten",
+                "North East": "Nordosten",
+                "North": "Norden",
+                "North West": "Nordwesten",
+                "West": "Westen",
+                "South West": "Südwesten",
+                "South": "Süden",
+                "South East": "Südosten"
+            };
+            var monthsdir = {
+                0: "Januar",
+                1: "Februar",
+                2: "März",
+                3: "April",
+                4: "Mai",
+                5: "Juni",
+                6: "Juli",
+                7: "August",
+                8: "September",
+                9: "Oktober",
+                10: "November",
+                11: "Dezember"
+            }
             var Temperature;
             var Humidity;
             var AirPressure;
@@ -268,22 +375,22 @@
                 });
                 obj = await res.json();
                 obj[0].temperature = obj[0].temperature / 10 + " °C";
-                document.getElementById("tempid").innerHTML = document.getElementById("tempid").innerHTML + obj[0].temperature;
+                document.getElementById("tempid").innerHTML = "Temperatur: " + obj[0].temperature;
 
                 obj[0].humidity = obj[0].humidity + " %";
-                document.getElementById("humidid").innerHTML = document.getElementById("humidid").innerHTML + obj[0].humidity;
+                document.getElementById("humidid").innerHTML = "Luftfeuchtigkeit: " + obj[0].humidity;
 
-                obj[0].air_pressure = obj[0].air_pressure + " hPa";
-                document.getElementById("airid").innerHTML = document.getElementById("airid").innerHTML + obj[0].air_pressure;
+                obj[0].air_pressure = obj[0].air_pressure/100 + " hPa";
+                document.getElementById("airid").innerHTML = "Luftdruck: " + obj[0].air_pressure;
 
-                obj[0].wind_speed = obj[0].wind_speed + " m/s";
-                document.getElementById("windspeedid").innerHTML = document.getElementById("windspeedid").innerHTML + obj[0].wind_speed;
+                obj[0].wind_speed = obj[0].wind_speed/100 + " m/s";
+                document.getElementById("windspeedid").innerHTML = "Windgeschwindigkeit: " + obj[0].wind_speed;
 
                 obj[0].wind_direction = obj[0].direction;
-                document.getElementById("winddirid").innerHTML = document.getElementById("winddirid").innerHTML + translationdir[obj[0].wind_direction];
+                document.getElementById("winddirid").innerHTML = "Windrichtung: " + translationdir[obj[0].wind_direction];
 
-                obj[0].rainfall = obj[0].rainfall + " mm";
-                document.getElementById("rainid").innerHTML = document.getElementById("rainid").innerHTML + obj[0].rainfall;
+                obj[0].rainfall = obj[0].rainfall/100 + " mm";
+                document.getElementById("rainid").innerHTML = "Niederschlagsmenge: " + obj[0].rainfall;
                 return;
 
                 /* var config;
@@ -296,7 +403,7 @@
 
             async function createGraph(graphType) {
                 let obj;
-                const postdata = { "graphType": graphType, "amount": 10, "interval": "year" };
+                const postdata = { "graphType": graphType, "interval": "1 DAY" };
                 const res = await fetch('sqlconnection.php', {
                     method: 'POST',
                     body: JSON.stringify(postdata),
@@ -305,32 +412,29 @@
                     }
                 });
                 obj = await res.json();
+                console.log(obj);
                 var labels = [];
                 var attributeData = [];
-                var originalDate, day, month, hours, minutes, simplifiedDateString;
+                var originalDate;
 
                 for (let i = 0; i < obj.length; i++) {
-                    originalDate = new Date(obj[i].time);
-
-                    day = originalDate.getDay();
-                    month = originalDate.getMonth();
-                    hour = originalDate.getHours();
-                    var startDate = new Date(originalDate.getFullYear(), 0, 1);
-                    var days = Math.floor((originalDate - startDate) /
-                        (24 * 60 * 60 * 1000));
-
-                    var week = Math.ceil(days / 7);
-                    var date = {"hour": hour, "day": day, "week": week, "month": month};
-                    labels.push(date["month"]);
-                    if (graphType === "temperature") {
-                        attributeData.push(obj[i][graphType] / 100);
-                    }
-                    else {
-                        attributeData.push(obj[i][graphType]);
+                    originalDate = new Date(obj[i].inter_start);
+                    labels.push(originalDate.getHours());
+                    if (graphType === "air_pressure") {
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "temperature"){
+                        attributeData.push(obj[i]["average_graphType"] / 10);
+                    } else if (graphType === "wind_speed"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "rainfall"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else {
+                        attributeData.push(obj[i]["average_graphType"]);
                     }
                 }
+
                 const data = {
-                    labels: labels,
+                    labels: labels.reverse(),
                     datasets: [{
                         label: translation[graphType],
                         fill: false,
@@ -346,7 +450,7 @@
                         pointHoverBorderWidth: 2,
                         backgroundColor: 'rgb(1,193,175)',
                         borderColor: 'rgb(1,193,175)',
-                        data: attributeData
+                        data: attributeData.reverse()
                     }]
                 };
 
@@ -356,7 +460,7 @@
                     options: {
                         plugins: {
                             legend: {
-                labels: {
+                                labels: {
                                     color: 'rgb(1,193,175)'
                                 }
                             }
@@ -382,7 +486,7 @@
                                 grid: {
                                     //display: false,
                                     tickColor: "rgb(1,193,175)" // this her
-            },
+                                },
                                 border: {
                                     color: "rgb(1,193,175)", // this here
                                 },
@@ -394,18 +498,56 @@
 
                 return config;
             }
-            async function updateChart(graphTypestr, graph) {
+            async function updateChart(graphType, graph) {
+                // TODO: select correct Interval
                 let obj;
-                const res = await fetch(`http://localhost:8000/data?graphType=${graphTypestr}`, {});
+
+                var selectElement = document.getElementById("timeInterval");
+                var selectedValue = selectElement.value;
+                intervaldict = { "day": "1 DAY", "month": "1 MONTH", "year": "1 YEAR", "decade": "10 YEAR" };
+                const postdata = { "graphType": graphType, "interval": intervaldict[selectedValue] }
+                const res = await fetch('sqlconnection.php', {
+                    method: 'POST',
+                    body: JSON.stringify(postdata),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
                 obj = await res.json();
-                if (obj.slice(-1).Timestamp != graph.data.labels.slice(-1)[0]) {
-                    graph.data.datasets[0].data.push(obj.slice(-1).temperature);
-                    graph.update();
+                attributeData = []
+                labels = []
+                for (let i = 0; i < obj.length; i++) {
+                    originalDate = new Date(obj[i].inter_start);
+                    if (selectedValue == "day") {
+                        labels.push(originalDate.getHours());
+                    } else if (selectedValue == "month") {
+                        labels.push(originalDate.getDate());
+                    } else if (selectedValue == "year") {
+                        labels.push(monthsdir[originalDate.getMonth()]);
+                    } else if (selectedValue == "decade") {
+                        labels.push(originalDate.getFullYear());
+                    }
+                    if (graphType === "air_pressure") {
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "temperature"){
+                        attributeData.push(obj[i]["average_graphType"] / 10);
+                    } else if (graphType === "wind_speed"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "rainfall"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else {
+                        attributeData.push(obj[i]["average_graphType"]);
+                    }
                 }
+                graph.data.labels = labels.reverse();
+                graph.data.datasets[0].data = attributeData.reverse();
+                graph.update();
+
             }
-            async function changeChart(graphTypestr, graph, amount, interval) {
+            async function changeChart(graphType, graph, interval) {
                 let obj;
-                const postdata = { "graphType": graphTypestr, "amount": amount, "interval": interval };
+                intervaldict = { "day": "1 DAY", "month": "1 MONTH", "year": "1 YEAR", "decade": "10 YEAR" };
+                const postdata = { "graphType": graphType, "interval": intervaldict[interval] }
                 const res = await fetch('sqlconnection.php', {
                     method: 'POST',
                     body: JSON.stringify(postdata),
@@ -416,27 +558,34 @@
                 obj = await res.json();
                 var labels = [];
                 var attributeData = [];
-                var originalDate, day, month, hours, minutes, simplifiedDateString;
+                var originalDate;
                 for (let i = 0; i < obj.length; i++) {
-                    originalDate = new Date(obj[i].time);
+                    originalDate = new Date(obj[i].inter_start);
 
-                    day = originalDate.getDay();
-                    month = originalDate.getMonth();
-                    hour = originalDate.getHours();
-                    var startDate = new Date(originalDate.getFullYear(), 0, 1);
-                    var days = Math.floor((originalDate - startDate) /
-                        (24 * 60 * 60 * 1000));
-
-                    var week = Math.ceil(days / 7);
-                    var date = {"hour": hour, "day": day, "week": week, "month": month};
-                    labels.push(date[interval]);
-
-                    labels.push(simplifiedDateString);
-                    attributeData.push(obj[i][graphTypestr]);
+                    if (interval == "day") {
+                        labels.push(originalDate.getHours());
+                    } else if (interval == "month") {
+                        labels.push(originalDate.getDate());
+                    } else if (interval == "year") {
+                        labels.push(monthsdir[originalDate.getMonth()]);
+                    } else if (interval == "decade") {
+                        labels.push(originalDate.getFullYear());
+                    }
+                    if (graphType === "air_pressure") {
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "temperature"){
+                        attributeData.push(obj[i]["average_graphType"] / 10);
+                    } else if (graphType === "wind_speed"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "rainfall"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else {
+                        attributeData.push(obj[i]["average_graphType"]);
+                    }
                 }
-            graph.data.datasets[0].data = attributeData;
-            graph.data.labels = labels;
-            graph.update();
+                graph.data.datasets[0].data = attributeData;
+                graph.data.labels = labels;
+                graph.update();
             }
             (async () => {
 
@@ -462,28 +611,31 @@
                 WindSpeed = new Chart(document.getElementById('wind_speed'),
                     config
                 );
-            config = await createGraph("rainfall")
-            Rainfall = new Chart(document.getElementById('rainfall'),
-                config
-            );
+                config = await createGraph("rainfall")
+                Rainfall = new Chart(document.getElementById('rainfall'),
+                    config
+                );
 
-            //setInterval(function () {updateChart("temperature", Temperature);}, 3000);
-            //setInterval(function () {updateChart("humidity", Humidity);}, 3000);
-            //setInterval(function () {updateChart("wind_speed", WindSpeed);}, 3000);
-            //setInterval(function () {updateChart("rain_fall", Rainfall);}, 3000);
+                setInterval(function () {updateChart("temperature", Temperature);}, 1000);
+                setInterval(function () {updateChart("humidity", Humidity);}, 1000);
+                setInterval(function () {updateChart("wind_speed", WindSpeed);}, 1000);
+                setInterval(function () {updateChart("rainfall", Rainfall);}, 1000);
+
+                setInterval(function () {currentInfo()}, 1000);
 
             })();
 
             function showSelectedValue() {
                 var selectElement = document.getElementById("timeInterval");
                 var selectedValue = selectElement.value;
-                changeChart("temperature", Temperature, 20, "month").then();
-                changeChart("humidity", Humidity, 20, "month").then();
-                changeChart("air_pressure", AirPressure, 20, "month").then();
-                changeChart("wind_speed", WindSpeed, 20, "month").then();
-                //changeChart("rainfall", Rainfall, 20, "year").then();
+                changeChart("temperature", Temperature, selectedValue).then();
+                changeChart("humidity", Humidity, selectedValue).then();
+                changeChart("air_pressure", AirPressure, selectedValue).then();
+                changeChart("wind_speed", WindSpeed, selectedValue).then();
+                changeChart("rainfall", Rainfall, selectedValue).then();
             }
             </script>
+
 
 
             <!-- <button id="toggle-dark-mode">Toggle Dark Mode</button>-->

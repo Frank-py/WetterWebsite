@@ -8,118 +8,118 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
         :root {
-            --arrow-bg: rgba(255, 255, 255, 0.1);
-            --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
-            --option-bg: white;
-            --select-bg: rgba(255, 255, 255, 0.05);
+        --arrow-bg: rgba(255, 255, 255, 0.1);
+        --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+        --option-bg: white;
+        --select-bg: rgba(255, 255, 255, 0.05);
         }
 
         select {
-            appearance: none;
-            border: 0;
-            outline: 0;
-            font: inherit;
-            width: 10%;
-            height: 2.5rem;
-            background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
-                linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
-            color: rgba(255, 255, 255, 0.85);
-            border-radius: 0.25em;
-            box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-            font-size: 1.2vw;
-            cursor: pointer;
-            background-color: #1c1c1E;
+        appearance: none;
+        border: 0;
+        outline: 0;
+        font: inherit;
+        width: 10%;
+        height: 2.5rem;
+        background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+        linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+        color: rgba(255, 255, 255, 0.85);
+        border-radius: 0.25em;
+        box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+        font-size: 1.2vw;
+        cursor: pointer;
+        background-color: #1c1c1E;
 
-            &::-ms-expand {
-                display: none;
-            }
+        &::-ms-expand {
+        display: none;
+        }
 
-            &:focus {
-                outline: none;
-            }
+        &:focus {
+        outline: none;
+        }
 
-            option {
-                color: inherit;
-                background-color: var(--bg);
-            }
+        option {
+        color: inherit;
+        background-color: var(--bg);
+        }
         }
 
         body {
-            font-family: Arial, sans-serif;
-            min-height: 100%;
-            background-color: #1C1C1E;
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 1.1vw;
+        font-family: Arial, sans-serif;
+        min-height: 100%;
+        background-color: #1C1C1E;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 3vw;
         }
 
         .title {
-            text-align: center;
-            font-family: "Arial", sans-serif;
-            font-size: 3vw;
-            text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
-            letter-spacing: 0.1vw;
-            color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        font-family: "Arial", sans-serif;
+        font-size: 3vw;
+        text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
+        letter-spacing: 0.1vw;
+        color: rgba(255, 255, 255, 0.9);
         }
 
         .allbutfooter {
-            min-height: calc(100vh - 4vw);
+        min-height: calc(100vh - 4vw);
         }
 
         .subtitle {
-            text-align: center;
-            font-family: "Arial", sans-serif;
-            font-size: 1.5vw;
-            text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
-            letter-spacing: 0.1vw;
-            color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        font-family: "Arial", sans-serif;
+        font-size: 1.5vw;
+        text-shadow: 1vw 1vw 2vw rgba(0, 0, 0, 0.2);
+        letter-spacing: 0.1vw;
+        color: rgba(255, 255, 255, 0.9);
         }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            padding: 1vw;
+        display: flex;
+        justify-content: space-between;
+        padding: 1vw;
         }
 
 
 
         .sun-icon {
-            font-size: 0.2vw; /* ?????? */
-            margin-bottom: 1vw;
+        font-size: 0.2vw; /* ?????? */
+        margin-bottom: 1vw;
         }
 
         .graph-card {
-            display: flex;
-            justify-content: space-between;
+        display: flex;
+        justify-content: space-between;
         }
 
         .graph {
-            position: relative;
-            border-radius: 5px;
-            padding: 1vw;
-            margin: 0.7vw;
-            flex: 1;
-            border: 0px solid rgba(255, 255, 255, 0.15);
-            background-color: #282829;
-            width: 40vw;
-            height: 32vh;
+        position: relative;
+        border-radius: 5px;
+        padding: 1vw;
+        margin: 0.7vw;
+        flex: 1;
+        border: 0px solid rgba(255, 255, 255, 0.15);
+        background-color: #282829;
+        width: 40vw;
+        height: 32vh;
         }
         .graph-top {
-            position: relative;
-            border-radius: 5px;
-            padding: 1vw;
-            margin: 0.7vw;
-            flex: 1;
-            border: 0px solid rgba(255, 255, 255, 0.15);
-            background-color: #282829;
-            width: 40vw;
-            height: 50vh;
+        position: relative;
+        border-radius: 5px;
+        padding: 1vw;
+        margin: 0.7vw;
+        flex: 1;
+        border: 0px solid rgba(255, 255, 255, 0.15);
+        background-color: #282829;
+        width: 40vw;
+        height: 50vh;
         }
 
         .graph:hover {
-            background-color: #2C2C2E;
+        background-color: #2C2C2E;
         }
         .graph-top:hover {
-            background-color: #2C2C2E;
+        background-color: #2C2C2E;
         }
 
         .wind-icon,
@@ -127,95 +127,95 @@
         .compass-icon,
         .humidity-icon {
 
-            font-size: 0.1vw; /* ?????? */
+        font-size: 0.1vw; /* ?????? */
         }
-        #timeInterval option[value=hour] {
-            background-color: #222223;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
         #timeInterval option[value=day] {
-            background-color: #222223;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        #timeInterval option[value=week] {
-            background-color: #222223;
-            color: rgba(255, 255, 255, 0.85);
+        background-color: #222223;
+        color: rgba(255, 255, 255, 0.85);
         }
 
         #timeInterval option[value=month] {
-            background-color: #222223;
-            color: rgba(255, 255, 255, 0.85);
+        background-color: #222223;
+        color: rgba(255, 255, 255, 0.85);
+        }
+
+        #timeInterval option[value=year] {
+        background-color: #222223;
+        color: rgba(255, 255, 255, 0.85);
+        }
+
+        #timeInterval option[value=decade] {
+        background-color: #222223;
+        color: rgba(255, 255, 255, 0.85);
         }
 
 
 
 
         .card {
-            text-align: center;
-            border: 0px solid rgba(255, 255, 255, 0.15);
-            background-color: #282829;
-            font-size: 1.2vw;
-            border-radius: 5px;
-            padding: 1em;
-            margin: 0.5em;
-            width: calc(14.28% - 1vh);
+        text-align: center;
+        border: 0px solid rgba(255, 255, 255, 0.15);
+        background-color: #282829;
+        font-size: 1.2vw;
+        border-radius: 5px;
+        padding: 1em;
+        margin: 0.5em;
+        width: calc(14.28% - 1vh);
         }
         .card p{
-            font-size: 1.2vw;
+        font-size: 1.2vw;
         }
         .card img {
-            opacity: 0.85;
+        opacity: 0.85;
         }
         .card:hover {
-            background-color: #3A3A3C;
+        background-color: #3A3A3C;
         }
 
         footer {
-            bottom: 0;
-            width: 100%;
+        bottom: 0;
+        width: 100%;
         }
 
         .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         }
 
 
         .footer-links {
-            list-style: none;
-            padding: 0;
-            margin-left: 2vw;
+        list-style: none;
+        padding: 0;
+        margin-left: 2vw;
         }
 
 
         .footer-links a {
-            font-size: 1.1vw;
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.85);
-            transition: color 0.3s;
+        font-size: 1.1vw;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.85);
+        transition: color 0.3s;
         }
 
         .footer-links a:hover {
-            color: rgba(255, 255, 255, 0.9);
+        color: rgba(255, 255, 255, 0.9);
         }
         .social-links {
-            list-style: none;
-            padding: 0;
-            margin-right: 2vw;
+        list-style: none;
+        padding: 0;
+        margin-right: 2vw;
         }
 
         .social-links a {
-            font-size: 1.1vw;
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.85);
+        font-size: 1.1vw;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.85);
         }
 
         .footer-bottom {
-            font-size: 1.1vw;
-            text-align: center;
+        font-size: 1.1vw;
+        text-align: center;
         }
         </style>
     </head>
@@ -241,7 +241,6 @@ if ("maxTouchPoints" in navigator) {
         );
     }
 }
-console.log("it printed it atleast")
 if (hasTouchScreen) {
     window.location.href = "/mIndex.html";
 }
@@ -279,10 +278,10 @@ if (hasTouchScreen) {
             <div style="text-align: center;">
                 <label style="display: flex; justify-items: center; align-items: center;" for="timeInterval"></label>
                 <select id="timeInterval" onchange="showSelectedValue()">
-                    <option selected="selected" value="hour">Stunde</option>
-                    <option value="day">Tag</option>
-                    <option value="week">Woche</option>
+                    <option selected="selected" value="day">Tag</option>
                     <option value="month">Monat</option>
+                    <option value="year">Jahr</option>
+                    <option value="decade">10 Jahre</option>
                 </select>
             </div>
             <div class="graph-card">
@@ -302,13 +301,36 @@ if (hasTouchScreen) {
                     <canvas id="wind_speed"></canvas>
                 </div>
                 <div class="graph">
-                    <canvas id="rain_fall"></canvas>
+                    <canvas id="rainfall"></canvas>
                 </div>
             </div>
             <script>
             // Example data for the graphs
             var translation = { "temperature": "Temperatur/ °C", "humidity": "Luftfeuchtigkeit/ %", "air_pressure": "Luftdruck/ hPa", "wind_speed": "Windgeschwindigkeit/ m/s", "rainfall": "Niederschlag/ mm" };
-            var translationdir = {"East": "Osten", "North": "Norden", "West": "Westen", "South": "Süden"}
+            var translationdir = {
+                "East": "Osten",
+                "North East": "Nordosten",
+                "North": "Norden",
+                "North West": "Nordwesten",
+                "West": "Westen",
+                "South West": "Südwesten",
+                "South": "Süden",
+                "South East": "Südosten"
+            };
+            var monthsdir = {
+                0: "Januar",
+                1: "Februar",
+                2: "März",
+                3: "April",
+                4: "Mai",
+                5: "Juni",
+                6: "Juli",
+                7: "August",
+                8: "September",
+                9: "Oktober",
+                10: "November",
+                11: "Dezember"
+            }
             var Temperature;
             var Humidity;
             var AirPressure;
@@ -330,22 +352,22 @@ if (hasTouchScreen) {
                 });
                 obj = await res.json();
                 obj[0].temperature = obj[0].temperature / 10 + " °C";
-                document.getElementById("tempid").innerHTML = document.getElementById("tempid").innerHTML + obj[0].temperature;
+                document.getElementById("tempid").innerHTML = "Temperatur: " + obj[0].temperature;
 
                 obj[0].humidity = obj[0].humidity + " %";
-                document.getElementById("humidid").innerHTML = document.getElementById("humidid").innerHTML + obj[0].humidity;
+                document.getElementById("humidid").innerHTML = "Luftfeuchtigkeit: " + obj[0].humidity;
 
-                obj[0].air_pressure = obj[0].air_pressure + " hPa";
-                document.getElementById("airid").innerHTML = document.getElementById("airid").innerHTML + obj[0].air_pressure;
+                obj[0].air_pressure = obj[0].air_pressure/100 + " hPa";
+                document.getElementById("airid").innerHTML = "Luftdruck: " + obj[0].air_pressure;
 
-                obj[0].wind_speed = obj[0].wind_speed + " m/s";
-                document.getElementById("windspeedid").innerHTML = document.getElementById("windspeedid").innerHTML + obj[0].wind_speed;
+                obj[0].wind_speed = obj[0].wind_speed/100 + " m/s";
+                document.getElementById("windspeedid").innerHTML = "Windgeschwindigkeit: " + obj[0].wind_speed;
 
                 obj[0].wind_direction = obj[0].direction;
-                document.getElementById("winddirid").innerHTML = document.getElementById("winddirid").innerHTML + translationdir[obj[0].wind_direction];
+                document.getElementById("winddirid").innerHTML = "Windrichtung: " + translationdir[obj[0].wind_direction];
 
-                obj[0].rainfall = obj[0].rainfall + " mm";
-                document.getElementById("rainid").innerHTML = document.getElementById("rainid").innerHTML + obj[0].rainfall;
+                obj[0].rainfall = obj[0].rainfall/100 + " mm";
+                document.getElementById("rainid").innerHTML = "Niederschlagsmenge: " + obj[0].rainfall;
                 return;
 
                 /* var config;
@@ -358,7 +380,7 @@ if (hasTouchScreen) {
 
             async function createGraph(graphType) {
                 let obj;
-                const postdata = { "graphType": graphType, "amount": 10, "interval": "year" };
+                const postdata = { "graphType": graphType, "interval": "1 DAY" };
                 const res = await fetch('sqlconnection.php', {
                     method: 'POST',
                     body: JSON.stringify(postdata),
@@ -367,32 +389,29 @@ if (hasTouchScreen) {
                     }
                 });
                 obj = await res.json();
+                console.log(obj);
                 var labels = [];
                 var attributeData = [];
-                var originalDate, day, month, hours, minutes, simplifiedDateString;
+                var originalDate;
 
                 for (let i = 0; i < obj.length; i++) {
-                    originalDate = new Date(obj[i].time);
-
-                    day = originalDate.getDay();
-                    month = originalDate.getMonth();
-                    hour = originalDate.getHours();
-                    var startDate = new Date(originalDate.getFullYear(), 0, 1);
-                    var days = Math.floor((originalDate - startDate) /
-                        (24 * 60 * 60 * 1000));
-
-                    var week = Math.ceil(days / 7);
-                    var date = {"hour": hour, "day": day, "week": week, "month": month};
-                    labels.push(date["month"]);
-                    if (graphType === "temperature") {
-                        attributeData.push(obj[i][graphType] / 100);
-                    }
-                    else {
-                        attributeData.push(obj[i][graphType]);
+                    originalDate = new Date(obj[i].inter_start);
+                    labels.push(originalDate.getHours());
+                    if (graphType === "air_pressure") {
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "temperature"){
+                        attributeData.push(obj[i]["average_graphType"] / 10);
+                    } else if (graphType === "wind_speed"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "rainfall"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else {
+                        attributeData.push(obj[i]["average_graphType"]);
                     }
                 }
+
                 const data = {
-                    labels: labels,
+                    labels: labels.reverse(),
                     datasets: [{
                         label: translation[graphType],
                         fill: false,
@@ -408,7 +427,7 @@ if (hasTouchScreen) {
                         pointHoverBorderWidth: 2,
                         backgroundColor: 'rgb(1,193,175)',
                         borderColor: 'rgb(1,193,175)',
-                        data: attributeData
+                        data: attributeData.reverse()
                     }]
                 };
 
@@ -456,18 +475,56 @@ if (hasTouchScreen) {
 
                 return config;
             }
-            async function updateChart(graphTypestr, graph) {
+            async function updateChart(graphType, graph) {
+                // TODO: select correct Interval
                 let obj;
-                const res = await fetch(`http://localhost:8000/data?graphType=${graphTypestr}`, {});
+
+                var selectElement = document.getElementById("timeInterval");
+                var selectedValue = selectElement.value;
+                intervaldict = { "day": "1 DAY", "month": "1 MONTH", "year": "1 YEAR", "decade": "10 YEAR" };
+                const postdata = { "graphType": graphType, "interval": intervaldict[selectedValue] }
+                const res = await fetch('sqlconnection.php', {
+                    method: 'POST',
+                    body: JSON.stringify(postdata),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
                 obj = await res.json();
-                if (obj.slice(-1).Timestamp != graph.data.labels.slice(-1)[0]) {
-                    graph.data.datasets[0].data.push(obj.slice(-1).temperature);
-                    graph.update();
+                attributeData = []
+                labels = []
+                for (let i = 0; i < obj.length; i++) {
+                    originalDate = new Date(obj[i].inter_start);
+                    if (selectedValue == "day") {
+                        labels.push(originalDate.getHours());
+                    } else if (selectedValue == "month") {
+                        labels.push(originalDate.getDate());
+                    } else if (selectedValue == "year") {
+                        labels.push(monthsdir[originalDate.getMonth()]);
+                    } else if (selectedValue == "decade") {
+                        labels.push(originalDate.getFullYear());
+                    }
+                    if (graphType === "air_pressure") {
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "temperature"){
+                        attributeData.push(obj[i]["average_graphType"] / 10);
+                    } else if (graphType === "wind_speed"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "rainfall"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else {
+                        attributeData.push(obj[i]["average_graphType"]);
+                    }
                 }
+                graph.data.labels = labels.reverse();
+                graph.data.datasets[0].data = attributeData.reverse();
+                graph.update();
+
             }
-            async function changeChart(graphTypestr, graph, amount, interval) {
+            async function changeChart(graphType, graph, interval) {
                 let obj;
-                const postdata = { "graphType": graphTypestr, "amount": amount, "interval": interval };
+                intervaldict = { "day": "1 DAY", "month": "1 MONTH", "year": "1 YEAR", "decade": "10 YEAR" };
+                const postdata = { "graphType": graphType, "interval": intervaldict[interval] }
                 const res = await fetch('sqlconnection.php', {
                     method: 'POST',
                     body: JSON.stringify(postdata),
@@ -478,23 +535,30 @@ if (hasTouchScreen) {
                 obj = await res.json();
                 var labels = [];
                 var attributeData = [];
-                var originalDate, day, month, hours, minutes, simplifiedDateString;
+                var originalDate;
                 for (let i = 0; i < obj.length; i++) {
-                    originalDate = new Date(obj[i].time);
+                    originalDate = new Date(obj[i].inter_start);
 
-                    day = originalDate.getDay();
-                    month = originalDate.getMonth();
-                    hour = originalDate.getHours();
-                    var startDate = new Date(originalDate.getFullYear(), 0, 1);
-                    var days = Math.floor((originalDate - startDate) /
-                        (24 * 60 * 60 * 1000));
-
-                    var week = Math.ceil(days / 7);
-                    var date = {"hour": hour, "day": day, "week": week, "month": month};
-                    labels.push(date[interval]);
-
-                    labels.push(simplifiedDateString);
-                    attributeData.push(obj[i][graphTypestr]);
+                    if (interval == "day") {
+                        labels.push(originalDate.getHours());
+                    } else if (interval == "month") {
+                        labels.push(originalDate.getDate());
+                    } else if (interval == "year") {
+                        labels.push(monthsdir[originalDate.getMonth()]);
+                    } else if (interval == "decade") {
+                        labels.push(originalDate.getFullYear());
+                    }
+                    if (graphType === "air_pressure") {
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "temperature"){
+                        attributeData.push(obj[i]["average_graphType"] / 10);
+                    } else if (graphType === "wind_speed"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else if (graphType === "rainfall"){
+                        attributeData.push(obj[i]["average_graphType"] / 100);
+                    } else {
+                        attributeData.push(obj[i]["average_graphType"]);
+                    }
                 }
                 graph.data.datasets[0].data = attributeData;
                 graph.data.labels = labels;
@@ -529,21 +593,23 @@ if (hasTouchScreen) {
                     config
                 );
 
-                //setInterval(function () {updateChart("temperature", Temperature);}, 3000);
-                //setInterval(function () {updateChart("humidity", Humidity);}, 3000);
-                //setInterval(function () {updateChart("wind_speed", WindSpeed);}, 3000);
-                //setInterval(function () {updateChart("rain_fall", Rainfall);}, 3000);
+                setInterval(function () {updateChart("temperature", Temperature);}, 1000);
+                setInterval(function () {updateChart("humidity", Humidity);}, 1000);
+                setInterval(function () {updateChart("wind_speed", WindSpeed);}, 1000);
+                setInterval(function () {updateChart("rainfall", Rainfall);}, 1000);
+
+                setInterval(function () {currentInfo()}, 1000);
 
             })();
 
             function showSelectedValue() {
                 var selectElement = document.getElementById("timeInterval");
                 var selectedValue = selectElement.value;
-                changeChart("temperature", Temperature, 20, "month").then();
-                changeChart("humidity", Humidity, 20, "month").then();
-                changeChart("air_pressure", AirPressure, 20, "month").then();
-                changeChart("wind_speed", WindSpeed, 20, "month").then();
-                //changeChart("rainfall", Rainfall, 20, "year").then();
+                changeChart("temperature", Temperature, selectedValue).then();
+                changeChart("humidity", Humidity, selectedValue).then();
+                changeChart("air_pressure", AirPressure, selectedValue).then();
+                changeChart("wind_speed", WindSpeed, selectedValue).then();
+                changeChart("rainfall", Rainfall, selectedValue).then();
             }
             </script>
 
@@ -564,7 +630,7 @@ if (hasTouchScreen) {
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2016-2023 WVS-Wetter. All rights reserved.
+                &copy; 2016-2024 WVS-Wetter. All rights reserved.
             </div>
         </footer>
     </body>

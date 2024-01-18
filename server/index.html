@@ -98,7 +98,7 @@
         padding: 1vw;
         margin: 0.7vw;
         flex: 1;
-        border: 0px solid rgba(255, 255, 255, 0.15);
+        border: 0 solid rgba(255, 255, 255, 0.15);
         background-color: #282829;
         width: 40vw;
         height: 32vh;
@@ -109,7 +109,7 @@
         padding: 1vw;
         margin: 0.7vw;
         flex: 1;
-        border: 0px solid rgba(255, 255, 255, 0.15);
+        border: 0 solid rgba(255, 255, 255, 0.15);
         background-color: #282829;
         width: 40vw;
         height: 50vh;
@@ -154,7 +154,7 @@
 
         .card {
         text-align: center;
-        border: 0px solid rgba(255, 255, 255, 0.15);
+        border: 0 solid rgba(255, 255, 255, 0.15);
         background-color: #282829;
         font-size: 1.2vw;
         border-radius: 5px;
@@ -220,9 +220,9 @@
         </style>
     </head>
     <script>
-var hasTouchScreen = false;
+        let hasTouchScreen = false;
 
-if ("maxTouchPoints" in navigator) {
+        if ("maxTouchPoints" in navigator) {
     hasTouchScreen = navigator.maxTouchPoints > 0;
 } else if ("msMaxTouchPoints" in navigator) {
     hasTouchScreen = navigator.msMaxTouchPoints > 0;
@@ -317,7 +317,7 @@ if (hasTouchScreen) {
                 "South": "Süden",
                 "South East": "Südosten"
             };
-            var monthsdir = {
+            const monthsdir = {
                 0: "Januar",
                 1: "Februar",
                 2: "März",
@@ -330,15 +330,15 @@ if (hasTouchScreen) {
                 9: "Oktober",
                 10: "November",
                 11: "Dezember"
-            }
-            var Temperature;
-            var Humidity;
-            var AirPressure;
-            var WindSpeed;
-            var Rainfall;
+            };
+            let Temperature;
+            let Humidity;
+            let AirPressure;
+            let WindSpeed;
+            let Rainfall;
 
-            var GustOfWind;
-            var WindDirection;
+            let GustOfWind;
+            let WindDirection;
 
             async function currentInfo() {
                 let obj;
@@ -368,7 +368,7 @@ if (hasTouchScreen) {
 
                 obj[0].rainfall = obj[0].rainfall/100 + " mm";
                 document.getElementById("rainid").innerHTML = "Niederschlagsmenge: " + obj[0].rainfall;
-                return;
+
 
                 /* var config;
                 config = await createGraph("temperature");
@@ -495,13 +495,13 @@ if (hasTouchScreen) {
                 labels = []
                 for (let i = 0; i < obj.length; i++) {
                     originalDate = new Date(obj[i].inter_start);
-                    if (selectedValue == "day") {
+                    if (selectedValue === "day") {
                         labels.push(originalDate.getHours());
-                    } else if (selectedValue == "month") {
+                    } else if (selectedValue === "month") {
                         labels.push(originalDate.getDate());
-                    } else if (selectedValue == "year") {
+                    } else if (selectedValue === "year") {
                         labels.push(monthsdir[originalDate.getMonth()]);
-                    } else if (selectedValue == "decade") {
+                    } else if (selectedValue === "decade") {
                         labels.push(originalDate.getFullYear());
                     }
                     if (graphType === "air_pressure") {
@@ -523,7 +523,7 @@ if (hasTouchScreen) {
             }
             async function changeChart(graphType, graph, interval) {
                 let obj;
-                intervaldict = { "day": "1 DAY", "month": "1 MONTH", "year": "1 YEAR", "decade": "10 YEAR" };
+                const intervaldict = {"day": "1 DAY", "month": "1 MONTH", "year": "1 YEAR", "decade": "10 YEAR"};
                 const postdata = { "graphType": graphType, "interval": intervaldict[interval] }
                 const res = await fetch('sqlconnection.php', {
                     method: 'POST',
@@ -539,13 +539,13 @@ if (hasTouchScreen) {
                 for (let i = 0; i < obj.length; i++) {
                     originalDate = new Date(obj[i].inter_start);
 
-                    if (interval == "day") {
+                    if (interval === "day") {
                         labels.push(originalDate.getHours());
-                    } else if (interval == "month") {
+                    } else if (interval === "month") {
                         labels.push(originalDate.getDate());
-                    } else if (interval == "year") {
+                    } else if (interval === "year") {
                         labels.push(monthsdir[originalDate.getMonth()]);
-                    } else if (interval == "decade") {
+                    } else if (interval === "decade") {
                         labels.push(originalDate.getFullYear());
                     }
                     if (graphType === "air_pressure") {
@@ -575,7 +575,7 @@ if (hasTouchScreen) {
                     config
                 );
 
-                var config;
+
                 config = await createGraph("humidity");
                 Humidity = new Chart(document.getElementById('humidity'),
                     config
@@ -620,7 +620,7 @@ if (hasTouchScreen) {
             <div class="footer-content">
                 <div class="footer-links">
                     <a href="#">Home</a></li>
-                    <a href="/about-us.html">About Us</a></li>
+                    <a href="/about-us.html">About Us</a>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/Frank-py/WetterWebsite"><img width="20vw" height="20vh"
